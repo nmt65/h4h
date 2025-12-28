@@ -1,0 +1,2333 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hope for Humanity | Suceava</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Favicon -->
+    <link rel="icon" href="/images/logo.png" type="image/x-icon">
+    
+    <style>
+        /* --- 1. RESET & VARIABLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            /* Culori Brand - Premium */
+            --primary: #2A9D8F;       /* Teal clasic */
+            --primary-dark: #21867a;
+            --primary-light: #76C7BC;
+            --accent: #E76F51;        /* Coral */
+            --accent-dark: #d65c3e;
+            --gold: #e9c46a;          /* Gold */
+            --dark: #1a2b3c;          /* Dark blue-gray mai închis */
+            --darker: #0d1721;
+            --light: #f0f5f7;         /* Albastru deschis în loc de alb */
+            --light-alt: #e8f0f3;     /* Alternativ pentru variație */
+            --white: #ffffff;
+            --gray: #5a6c7d;          /* Gri mai închis pentru contrast */
+            --light-gray: #dde4e8;    /* Gri mai cald */
+            --shadow: 0 6px 30px rgba(0,0,0,0.08);
+            --shadow-hover: 0 12px 40px rgba(0,0,0,0.15);
+            --shadow-strong: 0 15px 50px rgba(0,0,0,0.2);
+            --radius: 16px;
+            --radius-sm: 8px;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-fast: all 0.2s ease;
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.7;
+            font-weight: 500;
+        }
+
+        h1, h2, h3, h4 { 
+            font-family: 'Montserrat', sans-serif; 
+            font-weight: 800; 
+            letter-spacing: -0.3px;
+        }
+        a { text-decoration: none; transition: var(--transition); }
+        ul { list-style: none; }
+        .container { 
+            max-width: 1280px; 
+            margin: 0 auto; 
+            padding: 0 24px;
+        }
+
+        /* --- 2. NAVBAR PREMIUM REDESIGNAT --- */
+        header {
+            position: fixed; 
+            top: 0; 
+            width: 100%; 
+            z-index: 1000;
+            background: rgba(240, 245, 247, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+            padding: 0;
+            border-bottom: 1px solid rgba(42, 157, 143, 0.15);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .header-content { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            padding: 16px 24px;
+            max-width: 1280px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .logo { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            font-size: 1.4rem;
+            font-weight: 900; 
+            color: var(--dark);
+            z-index: 1001;
+        }
+        
+        .logo span {
+            color: var(--primary);
+            position: relative;
+            padding: 0 2px;
+        }
+        
+        .logo span::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .logo:hover span::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        .logo-icon img { 
+            height: 48px;
+            width: auto; 
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 2px 5px rgba(42, 157, 143, 0.2));
+        }
+        
+        .logo:hover .logo-icon img {
+            transform: rotate(5deg) scale(1.1);
+        }
+
+        /* Navbar links redesign - PREMIUM */
+        .nav-links { 
+            display: flex; 
+            gap: 35px;
+            align-items: center;
+        }
+        
+        .nav-links a { 
+            color: var(--dark); 
+            font-weight: 700; 
+            font-size: 0.95rem; 
+            position: relative;
+            padding: 8px 0;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .nav-links a::after {
+            content: ''; 
+            position: absolute; 
+            width: 0; 
+            height: 3px; 
+            bottom: 0; 
+            left: 0;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+            border-radius: 2px;
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after { 
+            width: 100%; 
+        }
+        
+        .nav-links a:hover, 
+        .nav-links a.active { 
+            color: var(--primary); 
+            text-shadow: 0 0 10px rgba(42, 157, 143, 0.1);
+        }
+        
+        /* Butonul de donații ca restul - fără fundal special */
+        .nav-links .donate-nav {
+            color: var(--accent);
+            font-weight: 800;
+        }
+        
+        .nav-links .donate-nav::after {
+            background: var(--accent);
+        }
+
+        .mobile-menu-btn { 
+            display: none; 
+            background: none; 
+            border: none; 
+            font-size: 1.5rem; 
+            color: var(--dark); 
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            background: rgba(42, 157, 143, 0.05);
+        }
+        
+        .mobile-menu-btn:hover {
+            background: rgba(42, 157, 143, 0.1);
+            transform: rotate(90deg);
+        }
+
+        /* --- 3. HERO SECTION - FUNDAL MAI COLORAT --- */
+        .hero {
+            padding: 180px 0 100px;
+            background: linear-gradient(135deg, 
+                rgba(42, 157, 143, 0.12) 0%, 
+                rgba(231, 111, 81, 0.08) 50%,
+                rgba(233, 196, 106, 0.05) 100%);
+            position: relative;
+            text-align: center;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(42, 157, 143, 0.1);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(42, 157, 143, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -150px;
+            left: -150px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(231, 111, 81, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-tag {
+            background: linear-gradient(90deg, var(--primary), var(--accent)); 
+            color: white; 
+            padding: 10px 25px; 
+            border-radius: 50px;
+            font-size: 0.8rem; 
+            font-weight: 900; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            margin-bottom: 40px; 
+            display: inline-block;
+            box-shadow: 0 6px 20px rgba(42, 157, 143, 0.25);
+            animation: pulse 2s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 6px 20px rgba(42, 157, 143, 0.25); }
+            100% { transform: scale(1.05); box-shadow: 0 8px 25px rgba(42, 157, 143, 0.35); }
+        }
+
+        .hero-title { 
+            font-size: 4rem; 
+            margin-bottom: 25px; 
+            line-height: 1.1; 
+            color: var(--dark);
+            letter-spacing: -1px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .hero-title span { 
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .hero-title span::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: rgba(42, 157, 143, 0.15);
+            z-index: -1;
+            border-radius: 4px;
+        }
+        
+        .hero-subtitle { 
+            font-size: 1.3rem; 
+            color: var(--gray); 
+            max-width: 800px; 
+            margin: 0 auto 60px; 
+            font-weight: 500;
+            line-height: 1.8;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 25px 35px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .hero-actions { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            gap: 40px; 
+        }
+        
+        .btn-main {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white; 
+            padding: 18px 55px; 
+            border-radius: 50px; 
+            font-weight: 800; 
+            font-size: 1.1rem;
+            border: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 8px 25px rgba(42, 157, 143, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-main::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+        }
+        
+        .btn-main:hover::before {
+            left: 0;
+        }
+        
+        .btn-main:hover { 
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(231, 111, 81, 0.4);
+        }
+
+        .hero-socials { 
+            display: flex; 
+            gap: 20px; 
+        }
+        .social-icon {
+            width: 52px; 
+            height: 52px; 
+            background: var(--white); 
+            border-radius: 50%;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            font-size: 1.3rem; 
+            color: var(--dark); 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.7s ease;
+        }
+        
+        .social-icon:hover::before {
+            left: 100%;
+        }
+        
+        .social-icon:hover { 
+            transform: translateY(-5px) scale(1.1); 
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .social-icon.fb:hover { 
+            background: #1877F2; 
+            color: white;
+            border-color: #1877F2;
+        }
+        
+        .social-icon.tt:hover { 
+            background: #000000; 
+            color: white;
+            border-color: #000000;
+        }
+        
+        .social-icon.ig:hover { 
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D); 
+            color: white;
+            border-color: #E1306C;
+        }
+
+        /* --- 4. SECTIUNI --- */
+        section { 
+            padding: 120px 0; 
+            position: relative;
+        }
+        .section-header { 
+            text-align: center; 
+            margin-bottom: 80px; 
+            position: relative;
+        }
+        
+        .section-title { 
+            font-size: 3rem; 
+            margin-bottom: 20px; 
+            color: var(--dark); 
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+        
+        .section-tag { 
+            color: var(--primary); 
+            font-weight: 800; 
+            letter-spacing: 2px; 
+            text-transform: uppercase; 
+            font-size: 0.9rem; 
+            display: block; 
+            margin-bottom: 20px; 
+            position: relative;
+        }
+
+        /* --- 5. IMPACT SECTION - FUNDAL COLORAT --- */
+        #about {
+            background: linear-gradient(135deg, rgba(232, 240, 243, 0.95) 0%, rgba(240, 245, 247, 1) 100%);
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid rgba(42, 157, 143, 0.1);
+            border-bottom: 1px solid rgba(42, 157, 143, 0.1);
+        }
+        
+        #about::before {
+            content: '';
+            position: absolute;
+            top: 100px;
+            left: -150px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(42, 157, 143, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        #about::after {
+            content: '';
+            position: absolute;
+            bottom: 100px;
+            right: -150px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(231, 111, 81, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .stats-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 35px; 
+            margin-top: 50px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .stat-item {
+            background: var(--white); 
+            padding: 50px 30px; 
+            border-radius: var(--radius);
+            box-shadow: var(--shadow); 
+            text-align: center; 
+            transition: var(--transition);
+            border: 1px solid rgba(42, 157, 143, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(42, 157, 143, 0.05), rgba(231, 111, 81, 0.05));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .stat-item:hover::before {
+            opacity: 1;
+        }
+        
+        .stat-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .stat-item:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .stat-item:hover { 
+            transform: translateY(-10px) scale(1.02); 
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .stat-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            display: inline-block;
+            transition: transform 0.5s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .stat-item:hover .stat-icon {
+            transform: rotate(15deg) scale(1.2);
+        }
+        
+        .stat-number { 
+            font-size: 3.5rem; 
+            font-weight: 900; 
+            color: var(--dark); 
+            line-height: 1; 
+            margin-bottom: 15px; 
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            display: inline-block;
+            z-index: 1;
+        }
+        
+        .stat-number::after {
+            content: '+';
+            color: var(--accent);
+            font-size: 2.5rem;
+            margin-left: 5px;
+        }
+        
+        .stat-label { 
+            font-size: 1rem; 
+            color: var(--gray); 
+            font-weight: 700; 
+            letter-spacing: 1px;
+            margin-top: 15px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- 6. PROJECTS SECTION - FUNDAL COLORAT --- */
+        .projects { 
+            background: var(--light-alt);
+            position: relative;
+            border-top: 1px solid rgba(42, 157, 143, 0.1);
+            border-bottom: 1px solid rgba(42, 157, 143, 0.1);
+        }
+        
+        .projects::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(42, 157, 143, 0.3), transparent);
+        }
+        
+        .projects-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+            gap: 35px; 
+        }
+        
+        .project-card {
+            background: var(--white); 
+            border-radius: var(--radius); 
+            overflow: hidden;
+            box-shadow: var(--shadow); 
+            transition: var(--transition); 
+            border: 1px solid rgba(42, 157, 143, 0.15);
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-card:hover { 
+            transform: translateY(-12px) scale(1.02); 
+            box-shadow: var(--shadow-strong);
+        }
+        
+        .project-image-container {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .project-image { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .project-card:hover .project-image {
+            transform: scale(1.1);
+        }
+        
+        .project-content { 
+            padding: 30px; 
+            position: relative; 
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-category { 
+            position: absolute; 
+            top: -15px; 
+            right: 30px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-dark)); 
+            color: white; 
+            padding: 7px 20px; 
+            border-radius: 25px; 
+            font-size: 0.75rem; 
+            font-weight: 800;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(231, 111, 81, 0.3);
+            z-index: 2;
+        }
+        
+        .project-title { 
+            margin-top: 5px; 
+            font-size: 1.4rem; 
+            color: var(--dark); 
+            margin-bottom: 15px;
+            line-height: 1.3;
+            flex-grow: 1;
+        }
+        
+        .project-description {
+            color: var(--gray); 
+            font-size: 0.95rem; 
+            line-height: 1.7;
+        }
+
+        /* --- 7. TEAM SECTION - FUNDAL COLORAT --- */
+        #team {
+            position: relative;
+            overflow: hidden;
+            background: var(--light);
+            border-top: 1px solid rgba(42, 157, 143, 0.1);
+            border-bottom: 1px solid rgba(42, 157, 143, 0.1);
+        }
+        
+        #team::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(233, 196, 106, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .team-leader-container {
+            display: flex; 
+            justify-content: center; 
+            margin-bottom: 80px; 
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .team-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 35px; 
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .team-member {
+            background: var(--white); 
+            padding: 35px 30px; 
+            border-radius: var(--radius);
+            box-shadow: var(--shadow); 
+            text-align: center; 
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: 1px solid rgba(42, 157, 143, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .team-member::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .team-member:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .team-member:hover { 
+            transform: translateY(-10px); 
+            box-shadow: var(--shadow-strong);
+        }
+        
+        .member-avatar-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 25px;
+        }
+        
+        .member-avatar {
+            width: 100%; 
+            height: 100%; 
+            border-radius: 50%; 
+            object-fit: cover;
+            border: 5px solid rgba(42, 157, 143, 0.15);
+            transition: var(--transition);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .member-avatar-container::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .team-member:hover .member-avatar-container::before {
+            opacity: 0.3;
+        }
+        
+        .team-member:hover .member-avatar {
+            border-color: rgba(42, 157, 143, 0.4);
+            transform: scale(1.08);
+        }
+        
+        .member-name { 
+            font-size: 1.2rem; 
+            margin-bottom: 8px; 
+            color: var(--dark);
+        }
+        
+        .member-role { 
+            color: var(--primary); 
+            font-weight: 800; 
+            margin-bottom: 20px; 
+            font-size: 0.85rem; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+            padding: 0 10px;
+        }
+        
+        .member-role::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 10px;
+            right: 10px;
+            height: 2px;
+            background: var(--primary);
+            opacity: 0.3;
+        }
+        
+        .member-description {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .team-member.president {
+            border-top: 5px solid var(--gold);
+            transform: scale(1.05);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .team-member.president:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+        
+        .team-member.president .member-role { 
+            color: var(--gold);
+        }
+        
+        .member-contact-icons { 
+            display: flex; 
+            justify-content: center; 
+            gap: 15px;
+        }
+        
+        .icon-btn {
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%; 
+            background: var(--light-alt);
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: var(--gray); 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1rem;
+            border: 1px solid rgba(42, 157, 143, 0.1);
+        }
+        
+        .icon-btn:hover { 
+            background: var(--primary); 
+            color: white; 
+            transform: translateY(-3px) scale(1.1);
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(42, 157, 143, 0.3);
+        }
+        
+        .icon-btn.ig:hover { 
+            background: linear-gradient(45deg, #405DE6, #833AB4, #C13584, #E1306C); 
+            border-color: #E1306C;
+        }
+
+        /* --- 8. TESTIMONIALS SECTION - FUNDAL COLORAT --- */
+        .testimonials-section {
+            background: linear-gradient(135deg, rgba(232, 240, 243, 0.95) 0%, rgba(240, 245, 247, 1) 100%);
+            position: relative;
+            border-top: 1px solid rgba(42, 157, 143, 0.1);
+            border-bottom: 1px solid rgba(42, 157, 143, 0.1);
+        }
+        
+        .testimonials-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 35px;
+        }
+        
+        .testimonial-card {
+            background: var(--white);
+            padding: 35px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--primary);
+            transition: var(--transition);
+            position: relative;
+            border: 1px solid rgba(42, 157, 143, 0.1);
+            overflow: hidden;
+        }
+        
+        .testimonial-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(42, 157, 143, 0.03), rgba(231, 111, 81, 0.03));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .testimonial-card:hover::before {
+            opacity: 1;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-strong);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            color: var(--gray);
+            margin-bottom: 30px;
+            line-height: 1.8;
+            position: relative;
+            font-size: 1rem;
+        }
+        
+        .testimonial-text::before {
+            content: "\201C";
+            font-size: 4.5rem;
+            color: rgba(42, 157, 143, 0.1);
+            position: absolute;
+            top: -30px;
+            left: -15px;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--light-gray);
+            transition: transform 0.3s ease;
+        }
+        
+        .testimonial-card:hover .author-avatar {
+            transform: scale(1.1);
+        }
+        
+        .author-info h4 {
+            margin-bottom: 5px;
+            font-size: 1.05rem;
+        }
+        
+        .author-role {
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        /* --- 9. DONATII --- */
+        .donate-section {
+            background: linear-gradient(135deg, var(--dark) 0%, #1e3a5f 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid rgba(42, 157, 143, 0.1);
+        }
+        
+        .donate-section::before {
+            content: '';
+            position: absolute;
+            top: -150px;
+            left: -150px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(42, 157, 143, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .donate-section .section-title { 
+            color: white; 
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .donate-section .section-tag { 
+            color: var(--accent);
+        }
+
+        .donation-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius);
+            padding: 50px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        .bank-details {
+            margin-top: 40px;
+            background: var(--white);
+            color: var(--dark);
+            padding: 35px;
+            border-radius: var(--radius);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            border: 1px solid rgba(42, 157, 143, 0.1);
+            text-align: left;
+        }
+
+        .bank-label { 
+            font-size: 0.85rem; 
+            color: var(--gray); 
+            margin-bottom: 8px; 
+            text-transform: uppercase; 
+            letter-spacing: 1.5px;
+            font-weight: 700;
+        }
+        
+        .bank-value { 
+            font-size: 1.2rem; 
+            font-weight: 800; 
+            margin-bottom: 25px; 
+            color: var(--dark); 
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .iban-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--light-alt);
+            padding: 15px 20px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--light-gray);
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .iban-container:hover {
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(42, 157, 143, 0.1);
+        }
+        
+        .iban-text { 
+            font-family: 'Courier New', monospace; 
+            font-weight: 800; 
+            font-size: 1.1rem; 
+            color: var(--dark); 
+            letter-spacing: 0.5px;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark)); 
+            color: white; 
+            border: none; 
+            padding: 10px 20px;
+            border-radius: 6px; 
+            cursor: pointer; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.9rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .copy-btn:hover { 
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark)); 
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(231, 111, 81, 0.3);
+        }
+
+        /* --- 10. CONTACT - FUNDAL COLORAT --- */
+        #contact {
+            background: var(--light-alt);
+            border-top: 1px solid rgba(42, 157, 143, 0.1);
+        }
+        
+        .contact-content { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 60px; 
+            align-items: flex-start; 
+        }
+        
+        .contact-form { 
+            background: var(--white); 
+            padding: 40px; 
+            border-radius: var(--radius); 
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(42, 157, 143, 0.15);
+            transition: var(--transition);
+        }
+        
+        .contact-form:hover {
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%; 
+            padding: 16px 20px; 
+            margin-bottom: 20px; 
+            border: 1px solid var(--light-gray); 
+            background: var(--light-alt);
+            border-radius: 10px; 
+            font-family: inherit; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1rem;
+            color: var(--dark);
+        }
+        
+        .form-group input:focus, .form-group textarea:focus { 
+            border-color: var(--primary); 
+            background: var(--white);
+            outline: none; 
+            box-shadow: 0 0 0 4px rgba(42, 157, 143, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .btn-submit { 
+            width: 100%; 
+            background: linear-gradient(135deg, var(--dark), var(--darker)); 
+            color: white; 
+            padding: 16px; 
+            border: none; 
+            border-radius: 10px; 
+            cursor: pointer; 
+            font-weight: 800; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+        
+        .btn-submit:hover { 
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark)); 
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(42, 157, 143, 0.3);
+        }
+        
+        .contact-info {
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(42, 157, 143, 0.15);
+            transition: var(--transition);
+        }
+        
+        .contact-info:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* --- 11. FOOTER - FĂRĂ NR TELEFON, DOAR COOKIES SI POLITICA --- */
+        footer {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+            color: white;
+            padding: 80px 0 30px;
+            position: relative;
+            overflow: hidden;
+            border-top: 5px solid var(--primary);
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            bottom: -150px;
+            right: -150px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(42, 157, 143, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            color: white;
+            display: inline-block;
+        }
+        
+        .footer-logo span {
+            color: var(--primary);
+            position: relative;
+        }
+        
+        .footer-logo span::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .footer-tagline {
+            color: #bbb;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            max-width: 400px;
+        }
+        
+        .footer-heading {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            font-weight: 800;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            display: block;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-left: 0;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+            padding-left: 8px;
+            transform: translateX(5px);
+        }
+        
+        .footer-links a::before {
+            content: '›';
+            position: absolute;
+            left: -15px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover::before {
+            left: 0;
+            opacity: 1;
+            color: var(--primary);
+        }
+        
+        .footer-socials {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .footer-socials a {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ddd;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.1rem;
+            border: 1px solid transparent;
+        }
+        
+        .footer-socials a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px) scale(1.1);
+            border-color: var(--primary);
+            box-shadow: 0 8px 20px rgba(42, 157, 143, 0.3);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            padding-top: 30px;
+            color: #999;
+            font-size: 0.95rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-legal {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .footer-legal a {
+            color: #aaa;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .footer-legal a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-legal a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .footer-legal a:hover::after {
+            width: 100%;
+        }
+
+        /* --- 12. EMAIL LINKS --- */
+        .email-link {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 1px dotted rgba(42, 157, 143, 0.4);
+            padding-bottom: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        .email-link:hover {
+            color: var(--primary);
+            border-bottom: 1px solid var(--primary);
+        }
+
+        /* --- 13. SCROLL PROGRESS BAR --- */
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: transparent;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1001;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+
+        /* --- MOBILE --- */
+        @media (max-width: 1200px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.8rem;
+            }
+            
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+            }
+            
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links { 
+                position: fixed; 
+                top: 0; 
+                left: 0; 
+                width: 100%; 
+                height: 100vh;
+                background: rgba(240, 245, 247, 0.98);
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+                flex-direction: column; 
+                padding: 120px 40px 40px; 
+                transform: translateX(-100%); 
+                transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                gap: 25px;
+                z-index: 1000;
+                overflow-y: auto;
+            }
+            
+            .nav-links.active { 
+                transform: translateX(0); 
+            }
+            
+            .mobile-menu-btn { 
+                display: block; 
+            }
+            
+            .hero-title { 
+                font-size: 2.5rem; 
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+                padding: 20px;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .footer-legal {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn-main {
+                padding: 16px 40px;
+                font-size: 1rem;
+            }
+            
+            .donation-card {
+                padding: 30px 20px;
+            }
+            
+            .bank-details {
+                padding: 25px 20px;
+            }
+            
+            .iban-container {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .copy-btn {
+                align-self: stretch;
+                justify-content: center;
+            }
+        }
+        
+        .fade-in { 
+            animation: fadeIn 1s cubic-bezier(0.4, 0, 0.2, 1); 
+        }
+        
+        @keyframes fadeIn { 
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            } 
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            } 
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Scroll Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <header>
+        <div class="header-content">
+            <a href="#" class="logo">
+                <div class="logo-icon"><img src="/images/logo.png" alt="H4H"></div>
+                <div>Hope 4 <span>Humanity</span></div>
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="active">Acasă</a></li>
+                <li><a href="#about">Impact</a></li>
+                <li><a href="#projects">Proiecte</a></li>
+                <li><a href="#team">Echipa</a></li>
+                <li><a href="#testimonials">Voluntari</a></li>
+                <li><a href="#donate" class="donate-nav">Donații</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container fade-in">
+            <span class="hero-tag">Asociație Non-Profit</span>
+            <h1 class="hero-title">Hope for Humanity <span>Suceava</span></h1>
+            <p class="hero-subtitle">Împreună readucem speranța în comunitățile din Bucovina. Fii schimbarea pe care vrei să o vezi în lume și alătură-te mișcării noastre pentru un impact durabil și transformări de lungă durată.</p>
+            
+            <div class="hero-actions">
+                <a href="#donate" class="btn-main">
+                    <i class="fas fa-heart"></i> Susține Cauza
+                </a>
+                
+                <div class="hero-socials">
+                    <a href="https://www.instagram.com/hope4humanityassociation" target="_blank" class="social-icon ig" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.facebook.com/AsociatiaHope4Humanity/" target="_blank" class="social-icon fb" title="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.tiktok.com/@hope4humanityassociation" target="_blank" class="social-icon tt" title="TikTok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Impactul Nostru</span>
+                <h2 class="section-title">Cifrele Speranței</h2>
+                <p style="color: var(--gray); max-width: 800px; margin: 0 auto; font-size: 1.1rem;">Fiecare număr reprezintă o poveste de viață schimbată în bine. Măsurăm succesul prin zâmbetele pe care le aducem în comunitate și prin transformările durabile pe care le creăm.</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="stat-number" data-count="28">0</div>
+                    <div class="stat-label">Proiecte Finalizate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <div class="stat-number" data-count="180">0</div>
+                    <div class="stat-label">Voluntari Activi</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="stat-number" data-count="6">0</div>
+                    <div class="stat-label">Ani de Activitate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="stat-number" data-count="15">0</div>
+                    <div class="stat-label">Parteneri Locali</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Portofoliu</span>
+                <h2 class="section-title">Amprenta H4H</h2>
+                <p style="color: var(--gray); max-width: 800px; margin: 0 auto; font-size: 1.1rem;">De-a lungul anilor am realizat numeroase proiecte care au transformat vieți și comunități, aducând speranță și oportunități acolo unde era nevoie.</p>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image-container">
+                        <img src="https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Casa" class="project-image">
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Construcție</span>
+                        <h3 class="project-title">Casa Bucuriei - Bosanci</h3>
+                        <p class="project-description">Locuință completă pentru o familie cu 4 copii. Structură eficientă energetic cu izolație termică și panouri solare.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image-container">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Renovare" class="project-image">
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Renovare</span>
+                        <h3 class="project-title">Centru Social Suceava</h3>
+                        <p class="project-description">Reabilitare completă a spațiului pentru educație și activități recreative destinate copiilor defavorizați.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image-container">
+                        <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Voluntariat" class="project-image">
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Comunitate</span>
+                        <h3 class="project-title">Voluntariat Corporativ</h3>
+                        <p class="project-description">Echipe locale au ajutat la placarea cu polistiren și vopsirea fațadei unei școli din comunitate.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image-container">
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Renovare Școală" class="project-image">
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Educație</span>
+                        <h3 class="project-title">Renovare Școală Sat Gălănești</h3>
+                        <p class="project-description">Modernizare săli de clasă și crearea unui spațiu de studiu pentru elevii din zona rurală.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image-container">
+                        <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Ajutor Umanitar" class="project-image">
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Ajutor Umanitar</span>
+                        <h3 class="project-title">Campanie Iarnă 2023</h3>
+                        <p class="project-description">Distribuire de haine, alimente și materiale de încălzit pentru familii vulnerabile din Suceava.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image-container">
+                        <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Eco Proiect" class="project-image">
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Mediu</span>
+                        <h3 class="project-title">Grădina Comunitară</h3>
+                        <p class="project-description">Crearea unei grădini comunitare pentru locuitorii unui cartier și educație ecologică pentru copii.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image-container">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Centru Tineri" class="project-image">
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Tineret</span>
+                        <h3 class="project-title">Centru de Tineret Rădăuți</h3>
+                        <p class="project-description">Amenajarea unui spațiu pentru activități extracurriculare și dezvoltare personală pentru tineri.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image-container">
+                        <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Accessibilitate" class="project-image">
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Accessibilitate</span>
+                        <h3 class="project-title">Acces pentru Persoane cu Dizabilități</h3>
+                        <p class="project-description">Instalare rampă de acces și adaptare spații pentru persoane cu mobilitate redusă în clădiri publice.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image-container">
+                        <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Festival" class="project-image">
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Eveniment</span>
+                        <h3 class="project-title">Festivalul Speranței 2023</h3>
+                        <p class="project-description">Organizarea unui festival comunitar cu concerte, ateliere și activități pentru întreaga familie.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="team">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Oamenii din Spate</span>
+                <h2 class="section-title">Board-ul H4H</h2>
+                <p style="color: var(--gray); max-width: 800px; margin: 0 auto; font-size: 1.1rem;">Fiecare membru al echipei noastre aduce expertiză și pasiune pentru a transforma comunitățile din Suceava. Suntem uniti de aceeași viziune și misiune.</p>
+            </div>
+            
+            <div class="team-leader-container">
+                <div class="team-member president">
+                    <div class="member-avatar-container">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Presedinte" class="member-avatar">
+                    </div>
+                    <h3 class="member-name">Alexandru Popescu</h3>
+                    <div class="member-role">Președinte</div>
+                    <div class="member-description">Coordonarea generală a asociației, reprezentare publică, dezvoltare strategică și gestionarea parteneriatelor majore. Cu peste 10 ani de experiență în sectorul nonprofit.</div>
+                    <div class="member-contact-icons">
+                        <a href="https://www.instagram.com/alexandrupopescu_h4h" target="_blank" class="icon-btn ig" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=presedinte@hope4humanity.ro&su=Contact%20Hope%20for%20Humanity%20Suceava&body=Bun%C4%83%20ziua,%0D%0A%0D%0AV%C4%83%20contactez%20în%20leg%C4%83tur%C4%83%20cu...&bcc=" target="_blank" class="icon-btn" title="Trimite email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="tel:+40700000000" class="icon-btn" title="Telefon">
+                            <i class="fas fa-phone"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Membrii Board - 3 pe linie -->
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-avatar-container">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Vice" class="member-avatar">
+                    </div>
+                    <h3 class="member-name">Elena Ionescu</h3>
+                    <div class="member-role">Vicepreședinte</div>
+                    <div class="member-description">Asistență președintelui, gestionarea proiectelor curente, coordonarea echipelor de voluntari pe teren și implementarea strategiilor operaționale.</div>
+                    <div class="member-contact-icons">
+                        <a href="https://www.instagram.com/elenaionescu_h4h" target="_blank" class="icon-btn ig" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=vicepresedinte@hope4humanity.ro&su=Contact%20Hope%20for%20Humanity%20Suceava&body=Bun%C4%83%20ziua,%0D%0A%0D%0AV%C4%83%20contactez%20în%20leg%C4%83tur%C4%83%20cu...&bcc=" target="_blank" class="icon-btn" title="Trimite email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-avatar-container">
+                        <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Relatii" class="member-avatar">
+                    </div>
+                    <h3 class="member-name">Mihai Constantinescu</h3>
+                    <div class="member-role">Resp. Relații Externe</div>
+                    <div class="member-description">Dezvoltarea parteneriatelor cu companii și autorități, fundraising, relații cu mass-media și instituții publice. Expert în comunicare strategică.</div>
+                    <div class="member-contact-icons">
+                        <a href="https://www.instagram.com/mihaiconstantinescu_h4h" target="_blank" class="icon-btn ig" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=relatii.externe@hope4humanity.ro&su=Contact%20Hope%20for%20Humanity%20Suceava&body=Bun%C4%83%20ziua,%0D%0A%0D%0AV%C4%83%20contactez%20în%20leg%C4%83tur%C4%83%20cu...&bcc=" target="_blank" class="icon-btn" title="Trimite email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-avatar-container">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="HR" class="member-avatar">
+                    </div>
+                    <h3 class="member-name">Ana Maria Vasilescu</h3>
+                    <div class="member-role">Resp. Resurse Umane</div>
+                    <div class="member-description">Recrutare voluntari, training, gestionarea programelor de voluntariat, dezvoltarea competențelor membrilor și crearea unei culturi organizaționale pozitive.</div>
+                    <div class="member-contact-icons">
+                        <a href="https://www.instagram.com/anamariavasilescu_h4h" target="_blank" class="icon-btn ig" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=resurse.umane@hope4humanity.ro&su=Contact%20Hope%20for%20Humanity%20Suceava&body=Bun%C4%83%20ziua,%0D%0A%0D%0AV%C4%83%20contactez%20în%20leg%C4%83tur%C4%83%20cu...&bcc=" target="_blank" class="icon-btn" title="Trimite email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-avatar-container">
+                        <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Social Media" class="member-avatar">
+                    </div>
+                    <h3 class="member-name">Ioana Dumitrescu</h3>
+                    <div class="member-role">Resp. Social Media</div>
+                    <div class="member-description">Strategia digitală, managementul rețelelor sociale, crearea de conținut, campanii online și promovare. Expert în marketing digital și storytelling.</div>
+                    <div class="member-contact-icons">
+                        <a href="https://www.instagram.com/ioanadumitrescu_h4h" target="_blank" class="icon-btn ig" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=socialmedia@hope4humanity.ro&su=Contact%20Hope%20for%20Humanity%20Suceava&body=Bun%C4%83%20ziua,%0D%0A%0D%0AV%C4%83%20contactez%20în%20leg%C4%83tur%C4%83%20cu...&bcc=" target="_blank" class="icon-btn" title="Trimite email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-avatar-container">
+                        <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Redactie" class="member-avatar">
+                    </div>
+                    <h3 class="member-name">Andrei Georgescu</h3>
+                    <div class="member-role">Resp. Redacție</div>
+                    <div class="member-description">Redactarea materialelor informative, rapoarte, articole, comunicate de presă și conținut pentru site. Jurnalist cu experiență în sectorul nonprofit.</div>
+                    <div class="member-contact-icons">
+                        <a href="https://www.instagram.com/andreigeorgescu_h4h" target="_blank" class="icon-btn ig" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=redactie@hope4humanity.ro&su=Contact%20Hope%20for%20Humanity%20Suceava&body=Bun%C4%83%20ziua,%0D%0A%0D%0AV%C4%83%20contactez%20în%20leg%C4%83tur%C4%83%20cu...&bcc=" target="_blank" class="icon-btn" title="Trimite email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-avatar-container">
+                        <img src="https://randomuser.me/api/portraits/women/90.jpg" alt="Designer" class="member-avatar">
+                    </div>
+                    <h3 class="member-name">Cristina Mihai</h3>
+                    <div class="member-role">Graphic Designer</div>
+                    <div class="member-description">Design materiale promoționale, identitate vizuală, bannere, postări grafice și design pentru evenimente. Creative Director cu experiență de 8 ani.</div>
+                    <div class="member-contact-icons">
+                        <a href="https://www.instagram.com/cristinamihai_h4h" target="_blank" class="icon-btn ig" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=design@hope4humanity.ro&su=Contact%20Hope%20for%20Humanity%20Suceava&body=Bun%C4%83%20ziua,%0D%0A%0D%0AV%C4%83%20contactez%20în%20leg%C4%83tur%C4%83%20cu...&bcc=" target="_blank" class="icon-btn" title="Trimite email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECȚIUNEA "VOCEA VOLUNTARILOR" - MAI MULTE TESTIMONIALE -->
+    <section id="testimonials" class="testimonials-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Experiențe Personale</span>
+                <h2 class="section-title">Vocea Voluntarilor</h2>
+                <p style="color: var(--gray); max-width: 800px; margin: 0 auto; font-size: 1.1rem;">Află ce spun oamenii care au făcut diferența alături de noi. Poveștile lor sunt cele care ne motivează să continuăm.</p>
+            </div>
+            
+            <div class="testimonials-container">
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "Am venit la primul meu proiect cu H4H ca student și am rămas pentru experiența umană de neuitat. Să vezi zâmbetul unei familii când intră în casa lor nouă... nu are preț."
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Andrei" class="author-avatar">
+                            <div class="author-info">
+                                <h4>Andrei Popescu</h4>
+                                <div class="author-role">Voluntar de 2 ani</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "Ca mamă a două copii, să contribui la construirea unei case pentru o familie cu copii mici a fost una dintre cele mai frumoase experiențe. Aici am învățat că fiecare mic efort contează."
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Maria" class="author-avatar">
+                            <div class="author-info">
+                                <h4>Maria Ionescu</h4>
+                                <div class="author-role">Voluntar ocazional</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "Am coordonat echipa de tineri la renovarea centrului social. Nu doar că am transformat un spațiu, dar am construit prietenii și am descoperit puterea lucrului în echipă pentru comunitate."
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Elena" class="author-avatar">
+                            <div class="author-info">
+                                <h4>Elena Moldovan</h4>
+                                <div class="author-role">Coordonator Voluntari</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "Ca pensionar, am crezut că viața mea activă s-a încheiat. H4H mi-a arătat că am încă multe de oferit. Sunt voluntar de 3 ani și fiecare zi este o binecuvântare."
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Ion" class="author-avatar">
+                            <div class="author-info">
+                                <h4>Ion Vasile</h4>
+                                <div class="author-role">Voluntar Senior</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "Am venit din străinătate să-mi vizitez familia și am rămas să ajut la proiectul din comunitate. Acum vin în fiecare vară special pentru activitățile H4H."
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Ana" class="author-avatar">
+                            <div class="author-info">
+                                <h4>Ana Maria</h4>
+                                <div class="author-role">Voluntar Sezonier</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "Echipa H4H m-a învățat mai multe despre omenie și compasiune decât toți anii de școală. Sunt recunoscător pentru fiecare experiență și pentru oamenii minunați pe care i-am cunoscut."
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Mihai" class="author-avatar">
+                            <div class="author-info">
+                                <h4>Mihai Codreanu</h4>
+                                <div class="author-role">Voluntar de 1 an</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "Ca corporatist, voluntariatul cu H4H este cea mai bună terapie. Mă reconectez cu realitatea și contribui la ceva concret. Recomand tuturor colegilor mei."
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/women/55.jpg" alt="Corina" class="author-avatar">
+                            <div class="author-info">
+                                <h4>Corina Popa</h4>
+                                <div class="author-role">Voluntar Corporativ</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "Am început ca voluntar la vârsta de 16 ani. Acum, la 20, coordonez o echipă. H4H mi-a oferit nu doar experiență, ci și o a doua familie."
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/men/25.jpg" alt="Radu" class="author-avatar">
+                            <div class="author-info">
+                                <h4>Radu Mihai</h4>
+                                <div class="author-role">Lider de Echipa Tineri</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "După ce am pierdut soțul, voluntariatul cu H4H m-a ajutat să trec peste durere. Aici am găsit o nouă familie și un scop. Mulțumesc pentru tot!"
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/women/70.jpg" alt="Doamna Maria" class="author-avatar">
+                            <div class="author-info">
+                                <h4>Maria Grigore</h4>
+                                <div class="author-role">Voluntar de 4 ani</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECȚIUNEA DONAȚII -->
+    <section id="donate" class="donate-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Implică-te</span>
+                <h2 class="section-title">Susține Hope for Humanity</h2>
+                <p style="color: rgba(255,255,255,0.8); max-width: 800px; margin: 0 auto; font-size: 1.1rem;">Orice contribuție ne ajută să construim mai departe, să aducem speranță și să transformăm vieți în comunitățile din Suceava.</p>
+            </div>
+
+            <div class="donation-card">
+                <i class="fas fa-hand-holding-heart fa-3x" style="color: var(--accent); margin-bottom: 25px;"></i>
+                <h3 style="margin-bottom: 20px; font-size: 1.8rem;">Transfer Bancar</h3>
+                <p style="color: rgba(255,255,255,0.9); font-size: 1.05rem; margin-bottom: 30px;">Poți face o donație direct în contul asociației. Fondurile sunt folosite transparent pentru achiziția materialelor de construcție și pentru realizarea proiectelor noastre.</p>
+                
+                <div class="bank-details">
+                    <div class="bank-label">Titular Cont</div>
+                    <div class="bank-value">Asociația Hope for Humanity Suceava</div>
+                    
+                    <div class="bank-label">Banca</div>
+                    <div class="bank-value">Banca Transilvania</div>
+
+                    <div class="bank-label">IBAN (RON)</div>
+                    <div class="iban-container">
+                        <span class="iban-text" id="ibanText">RO99 BTRL 0000 0000 0000 00XX</span>
+                        <button class="copy-btn" onclick="copyIBAN()" title="Copiază IBAN">
+                            <i class="fas fa-copy"></i> Copiază IBAN
+                        </button>
+                    </div>
+                    
+                    <div class="bank-label">CIF (Cod Fiscal)</div>
+                    <div class="bank-value">12345678</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Spune Salut</span>
+                <h2 class="section-title">Contactează-ne</h2>
+                <p style="color: var(--gray); max-width: 800px; margin: 0 auto; font-size: 1.1rem;">Ai întrebări sau vrei să te implici? Scrie-ne un mesaj și te vom contacta în cel mai scurt timp.</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div style="margin-bottom: 40px;">
+                        <h3 style="color: var(--dark); margin-bottom: 15px; font-size: 1.4rem;">Sediul Nostru</h3>
+                        <p style="color: var(--gray); font-size: 1.05rem;">
+                            <i class="fas fa-map-marker-alt" style="color: var(--primary); margin-right: 12px; font-size: 1.1rem;"></i> 
+                            Str. Libertății nr. 15, Suceava
+                        </p>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--dark); margin-bottom: 15px; font-size: 1.4rem;">Email & Telefon</h3>
+                        <p style="color: var(--gray); margin-bottom: 15px; font-size: 1.05rem;">
+                            <i class="fas fa-envelope" style="color: var(--primary); margin-right: 12px; font-size: 1.1rem;"></i> 
+                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@hope4humanity.ro&su=Contact%20Hope%20for%20Humanity%20Suceava&body=Bun%C4%83%20ziua,%0D%0A%0D%0AV%C4%83%20contactez%20în%20leg%C4%83tur%C4%83%20cu...&bcc=" target="_blank" class="email-link" style="color: var(--gray); font-weight: 600;">
+                                contact@hope4humanity.ro
+                            </a>
+                        </p>
+                        <p style="color: var(--gray); font-size: 1.05rem;">
+                            <i class="fas fa-phone" style="color: var(--primary); margin-right: 12px; font-size: 1.1rem;"></i> 
+                            <a href="tel:+40740123456" class="email-link" style="color: var(--gray); font-weight: 600;">+40 740 123 456</a>
+                        </p>
+                    </div>
+                </div>
+                
+                <form class="contact-form" id="contactForm">
+                    <h3 style="margin-bottom: 25px; font-size: 1.4rem;">Trimite un mesaj</h3>
+                    <div class="form-group">
+                        <input type="text" placeholder="Numele tău" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Adresa de email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Subiect">
+                    </div>
+                    <div class="form-group">
+                        <textarea rows="5" placeholder="Mesajul tău... Cu ce te putem ajuta?" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-paper-plane"></i> TRIMITE MESAJ
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER - FĂRĂ NR TELEFON, DOAR COOKIES SI POLITICA -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">Hope 4 <span>Humanity</span></div>
+                    <p class="footer-tagline">Construim case, comunități și speranță în județul Suceava. Alătură-te mișcării noastre pentru un impact durabil și transformări pozitive în viața oamenilor.</p>
+                    <div class="footer-socials">
+                        <a href="https://www.facebook.com/AsociatiaHope4Humanity/" target="_blank" title="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/hope4humanityassociation" target="_blank" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@hope4humanityassociation" target="_blank" title="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@hope4humanity.ro&su=Contact%20Hope%20for%20Humanity%20Suceava&body=Bun%C4%83%20ziua,%0D%0A%0D%0AV%C4%83%20contactez%20în%20leg%C4%83tur%C4%83%20cu...&bcc=" target="_blank" title="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4 class="footer-heading">Link-uri Rapide</h4>
+                    <a href="#home">Acasă</a>
+                    <a href="#about">Impactul Nostru</a>
+                    <a href="#projects">Proiecte</a>
+                    <a href="#team">Echipa</a>
+                </div>
+                
+                <div class="footer-links">
+                    <h4 class="footer-heading">Resurse</h4>
+                    <a href="#donate">Donații</a>
+                    <a href="#testimonials">Povești de Succes</a>
+                    <a href="#contact">Contact</a>
+                    <a href="#projects">Portofoliu</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2024 Hope for Humanity Suceava. Toate drepturile rezervate.
+                </div>
+                <div class="footer-legal">
+                    <a href="#">Cookies</a>
+                    <a href="#">Politica de confidențialitate</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scripts Navigare
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const navList = document.getElementById('navLinks');
+        
+        mobileBtn.addEventListener('click', () => {
+            navList.classList.toggle('active');
+            mobileBtn.innerHTML = navList.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navList.classList.remove('active');
+                mobileBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                
+                // Update active class
+                document.querySelectorAll('.nav-links a').forEach(item => {
+                    item.classList.remove('active');
+                });
+                link.classList.add('active');
+            });
+        });
+
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        });
+
+        // Counter Animation
+        const counters = document.querySelectorAll('.stat-number');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = +counter.getAttribute('data-count');
+                    const speed = 150;
+                    const updateCount = () => {
+                        const count = +counter.innerText;
+                        const inc = target / speed;
+                        if(count < target) {
+                            counter.innerText = Math.ceil(count + inc);
+                            setTimeout(updateCount, 15);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    updateCount();
+                    observer.unobserve(counter);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        counters.forEach(c => observer.observe(c));
+
+        // Formular
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Mesaj trimis cu succes! Te vom contacta în cel mai scurt timp.');
+            e.target.reset();
+        });
+
+        // COPY IBAN FUNCTION
+        function copyIBAN() {
+            var ibanText = document.getElementById("ibanText").innerText;
+            navigator.clipboard.writeText(ibanText).then(function() {
+                // Schimbă textul butonului temporar
+                const btn = document.querySelector('.copy-btn');
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> Copiat!';
+                btn.style.background = 'linear-gradient(135deg, #2A9D8F, #21867a)';
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                    btn.style.background = 'linear-gradient(135deg, var(--primary), var(--primary-dark))';
+                }, 2000);
+            }, function(err) {
+                console.error('Eroare la copiere: ', err);
+            });
+        }
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 8px 40px rgba(0,0,0,0.12)';
+                header.style.background = 'rgba(240, 245, 247, 0.98)';
+                header.style.backdropFilter = 'blur(25px)';
+                header.style.webkitBackdropFilter = 'blur(25px)';
+                header.style.padding = '0';
+            } else {
+                header.style.boxShadow = '0 4px 30px rgba(0,0,0,0.08)';
+                header.style.background = 'rgba(240, 245, 247, 0.95)';
+                header.style.backdropFilter = 'blur(20px)';
+                header.style.webkitBackdropFilter = 'blur(20px)';
+                header.style.padding = '0';
+            }
+        });
+        
+        // Set active nav link on scroll
+        window.addEventListener('scroll', function() {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            const navHeight = document.querySelector('header').offsetHeight;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - navHeight - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const isClickInsideNav = navList.contains(e.target) || mobileBtn.contains(e.target);
+            if (!isClickInsideNav && navList.classList.contains('active')) {
+                navList.classList.remove('active');
+                mobileBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+
+        // Add hover effects to all interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add subtle animation to hero on load
+            const heroTitle = document.querySelector('.hero-title');
+            const heroSubtitle = document.querySelector('.hero-subtitle');
+            
+            setTimeout(() => {
+                heroTitle.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                heroSubtitle.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
