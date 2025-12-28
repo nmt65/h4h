@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="ro" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,14 +7,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Favicon -->
-    <link rel="icon" href="/images/logo.png" type="image/x-icon">
+    <link rel="icon" href="/images/logo_final.png" type="image/x-icon">
     
     <style>
-        /* --- 1. RESET & VARIABLES --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
+        /* --- VARIABILE & RESET --- */
         :root {
-            /* Culori Brand - Premium */
+            /* Tema Deschisă (Default) - Culorile originale ale echipei */
             --primary: #2A9D8F;       /* Teal clasic */
             --primary-dark: #21867a;
             --primary-light: #76C7BC;
@@ -28,6 +26,12 @@
             --white: #ffffff;
             --gray: #5a6c7d;          /* Gri mai închis pentru contrast */
             --light-gray: #dde4e8;    /* Gri mai cald */
+            
+            /* Glassmorphism variables */
+            --glass-bg: rgba(240, 245, 247, 0.95);
+            --glass-border: rgba(42, 157, 143, 0.15);
+            
+            /* Animations */
             --shadow: 0 6px 30px rgba(0,0,0,0.08);
             --shadow-hover: 0 12px 40px rgba(0,0,0,0.15);
             --shadow-strong: 0 15px 50px rgba(0,0,0,0.2);
@@ -37,41 +41,109 @@
             --transition-fast: all 0.2s ease;
         }
 
-        html { scroll-behavior: smooth; }
+        /* Tema Întunecată */
+        .dark {
+            --primary: #3DB8A8;
+            --primary-dark: #2A9D8F;
+            --primary-light: #66D4C3;
+            --accent: #FF8C6B;
+            --accent-dark: #E76F51;
+            --gold: #F4C542;
+            --dark: #E2E8F0;
+            --darker: #CBD5E1;
+            --light: #0F172A;
+            --light-alt: #1E293B;
+            --white: #1E293B;
+            --gray: #94A3B8;
+            --light-gray: #334155;
+            
+            /* Glassmorphism întunecat */
+            --glass-bg: rgba(15, 23, 42, 0.95);
+            --glass-border: rgba(61, 184, 168, 0.15);
+            
+            /* Umbre mai puternice pentru tema întunecată */
+            --shadow: 0 6px 30px rgba(0,0,0,0.25);
+            --shadow-hover: 0 12px 40px rgba(0,0,0,0.35);
+            --shadow-strong: 0 15px 50px rgba(0,0,0,0.45);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { 
+            scroll-behavior: smooth; 
+            scroll-padding-top: 90px;
+            overflow-x: hidden;
+        }
+        
         body {
             font-family: 'Open Sans', sans-serif;
             color: var(--dark);
             background-color: var(--light);
-            overflow-x: hidden;
             line-height: 1.7;
             font-weight: 500;
+            overflow-x: hidden;
+            transition: background-color 0.5s ease, color 0.5s ease;
+            position: relative;
         }
 
-        h1, h2, h3, h4 { 
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(42, 157, 143, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(231, 111, 81, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 50% 50%, transparent 0%, var(--light) 70%);
+            z-index: -1;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
+        .dark body::before {
+            opacity: 0.1;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(61, 184, 168, 0.1) 0%, transparent 15%),
+                radial-gradient(circle at 90% 80%, rgba(255, 140, 107, 0.1) 0%, transparent 15%),
+                radial-gradient(circle at 50% 50%, transparent 0%, #000 70%);
+        }
+
+        h1, h2, h3, h4, h5, h6 { 
             font-family: 'Montserrat', sans-serif; 
             font-weight: 800; 
-            letter-spacing: -0.3px;
+            letter-spacing: -0.02em;
+            color: var(--dark);
+            transition: color 0.5s ease;
         }
+        
         a { text-decoration: none; transition: var(--transition); }
         ul { list-style: none; }
+        
         .container { 
             max-width: 1280px; 
             margin: 0 auto; 
             padding: 0 24px;
         }
 
-        /* --- 2. NAVBAR PREMIUM REDESIGNAT --- */
+        /* --- CURSOR PERSONALIZAT - ELIMINAT --- */
+        .cursor {
+            display: none !important;
+        }
+
+        /* --- NAVBAR PREMIUM --- */
         header {
-            position: fixed; 
-            top: 0; 
-            width: 100%; 
+            position: fixed;
+            top: 0;
+            width: 100%;
             z-index: 1000;
-            background: rgba(240, 245, 247, 0.95);
+            background: var(--glass-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             box-shadow: 0 4px 30px rgba(0,0,0,0.08);
             padding: 0;
-            border-bottom: 1px solid rgba(42, 157, 143, 0.15);
+            border-bottom: 1px solid var(--glass-border);
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -101,22 +173,13 @@
             padding: 0 2px;
         }
         
+        /* Elimină efectul de sublinieri pentru logo */
         .logo span::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: none !important;
         }
         
         .logo:hover span::after {
-            transform: scaleX(1);
-            transform-origin: left;
+            display: none !important;
         }
         
         .logo-icon img { 
@@ -130,7 +193,51 @@
             transform: rotate(5deg) scale(1.1);
         }
 
-        /* Navbar links redesign - PREMIUM */
+        /* Buton Tema Întunecată */
+        .theme-toggle {
+            background: var(--light-alt);
+            border: 1px solid var(--glass-border);
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--dark);
+            font-size: 1.2rem;
+            margin-left: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .theme-toggle:hover {
+            transform: rotate(30deg);
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+        
+        .theme-toggle .fa-sun { 
+            display: none; 
+            color: #00ffc3;
+        }
+        
+        .theme-toggle .fa-moon { 
+            display: block; 
+            color: var(--dark);
+        }
+        
+        .dark .theme-toggle .fa-sun { 
+            display: block; 
+        }
+        
+        .dark .theme-toggle .fa-moon { 
+            display: none; 
+        }
+
+        /* Navbar links */
         .nav-links { 
             display: flex; 
             gap: 35px;
@@ -146,6 +253,7 @@
             letter-spacing: 0.5px;
             text-transform: uppercase;
             font-family: 'Montserrat', sans-serif;
+            transition: color 0.3s ease;
         }
         
         .nav-links a::after {
@@ -168,10 +276,9 @@
         .nav-links a:hover, 
         .nav-links a.active { 
             color: var(--primary); 
-            text-shadow: 0 0 10px rgba(42, 157, 143, 0.1);
+            text-shadow: 0 0 10px rgba(61, 184, 168, 0.1);
         }
         
-        /* Butonul de donații ca restul - fără fundal special */
         .nav-links .donate-nav {
             color: var(--accent);
             font-weight: 800;
@@ -200,7 +307,7 @@
             transform: rotate(90deg);
         }
 
-        /* --- 3. HERO SECTION - FUNDAL MAI COLORAT --- */
+        /* --- HERO SECTION - CU PARTICULE --- */
         .hero {
             padding: 180px 0 100px;
             background: linear-gradient(135deg, 
@@ -214,55 +321,66 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
+            transition: background 0.5s ease;
+        }
+        
+        .dark .hero {
+            background: linear-gradient(135deg, 
+                rgba(61, 184, 168, 0.12) 0%, 
+                rgba(255, 140, 107, 0.08) 50%,
+                rgba(244, 197, 66, 0.05) 100%);
+            border-bottom: 1px solid rgba(61, 184, 168, 0.1);
         }
 
-        .hero::before {
-            content: '';
+        .hero-bg {
             position: absolute;
-            top: -200px;
-            right: -200px;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(42, 157, 143, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: 0;
         }
 
-        .hero::after {
-            content: '';
+        #particle-canvas {
             position: absolute;
-            bottom: -150px;
-            left: -150px;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(231, 111, 81, 0.08) 0%, transparent 70%);
-            border-radius: 50%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: 0;
         }
 
         .hero .container {
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
         .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
             background: linear-gradient(90deg, var(--primary), var(--accent)); 
             color: white; 
-            padding: 10px 25px; 
+            padding: 12px 25px; 
             border-radius: 50px;
             font-size: 0.8rem; 
             font-weight: 900; 
             text-transform: uppercase; 
             letter-spacing: 2px; 
             margin-bottom: 40px; 
-            display: inline-block;
             box-shadow: 0 6px 20px rgba(42, 157, 143, 0.25);
-            animation: pulse 2s infinite alternate;
+            animation: float 3s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 6px 20px rgba(42, 157, 143, 0.25); }
-            100% { transform: scale(1.05); box-shadow: 0 8px 25px rgba(42, 157, 143, 0.35); }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .dark .hero-tag {
+            box-shadow: 0 6px 20px rgba(61, 184, 168, 0.25);
         }
 
         .hero-title { 
@@ -272,6 +390,7 @@
             color: var(--dark);
             letter-spacing: -1px;
             text-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: relative;
         }
         
         .hero-title span { 
@@ -292,6 +411,10 @@
             border-radius: 4px;
         }
         
+        .dark .hero-title span::after {
+            background: rgba(61, 184, 168, 0.15);
+        }
+        
         .hero-subtitle { 
             font-size: 1.3rem; 
             color: var(--gray); 
@@ -305,6 +428,16 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.5);
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.5s ease;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .dark .hero-subtitle {
+            background: rgba(30, 41, 59, 0.85);
+            color: var(--gray);
+            border: 1px solid rgba(61, 184, 168, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
         .hero-actions { 
@@ -312,6 +445,8 @@
             flex-direction: column; 
             align-items: center; 
             gap: 40px; 
+            position: relative;
+            z-index: 2;
         }
         
         .btn-main {
@@ -352,6 +487,10 @@
             transform: translateY(-5px) scale(1.05);
             box-shadow: 0 15px 35px rgba(231, 111, 81, 0.4);
         }
+        
+        .dark .btn-main:hover {
+            box-shadow: 0 15px 35px rgba(255, 140, 107, 0.4);
+        }
 
         .hero-socials { 
             display: flex; 
@@ -374,6 +513,12 @@
             overflow: hidden;
         }
         
+        .dark .social-icon {
+            background: var(--white);
+            color: var(--light);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
         .social-icon::before {
             content: '';
             position: absolute;
@@ -383,6 +528,10 @@
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
             transition: left 0.7s ease;
+        }
+        
+        .dark .social-icon::before {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
         }
         
         .social-icon:hover::before {
@@ -412,14 +561,27 @@
             border-color: #E1306C;
         }
 
-        /* --- 4. SECTIUNI --- */
+        /* --- SECTION STYLES --- */
         section { 
             padding: 120px 0; 
             position: relative;
+            transition: background-color 0.5s ease;
         }
+        
         .section-header { 
             text-align: center; 
             margin-bottom: 80px; 
+            position: relative;
+        }
+        
+        .section-tag { 
+            color: var(--primary); 
+            font-weight: 800; 
+            letter-spacing: 2px; 
+            text-transform: uppercase; 
+            font-size: 0.9rem; 
+            display: block; 
+            margin-bottom: 20px; 
             position: relative;
         }
         
@@ -442,25 +604,21 @@
             background: linear-gradient(90deg, var(--primary), var(--accent));
             border-radius: 2px;
         }
-        
-        .section-tag { 
-            color: var(--primary); 
-            font-weight: 800; 
-            letter-spacing: 2px; 
-            text-transform: uppercase; 
-            font-size: 0.9rem; 
-            display: block; 
-            margin-bottom: 20px; 
-            position: relative;
-        }
 
-        /* --- 5. IMPACT SECTION - FUNDAL COLORAT --- */
+        /* --- IMPACT SECTION --- */
         #about {
             background: linear-gradient(135deg, rgba(232, 240, 243, 0.95) 0%, rgba(240, 245, 247, 1) 100%);
             position: relative;
             overflow: hidden;
             border-top: 1px solid rgba(42, 157, 143, 0.1);
             border-bottom: 1px solid rgba(42, 157, 143, 0.1);
+            transition: background 0.5s ease;
+        }
+        
+        .dark #about {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 1) 100%);
+            border-top: 1px solid rgba(61, 184, 168, 0.1);
+            border-bottom: 1px solid rgba(61, 184, 168, 0.1);
         }
         
         #about::before {
@@ -475,6 +633,10 @@
             z-index: 0;
         }
         
+        .dark #about::before {
+            background: radial-gradient(circle, rgba(61, 184, 168, 0.08) 0%, transparent 70%);
+        }
+        
         #about::after {
             content: '';
             position: absolute;
@@ -485,6 +647,10 @@
             background: radial-gradient(circle, rgba(231, 111, 81, 0.08) 0%, transparent 70%);
             border-radius: 50%;
             z-index: 0;
+        }
+        
+        .dark #about::after {
+            background: radial-gradient(circle, rgba(255, 140, 107, 0.08) 0%, transparent 70%);
         }
 
         .stats-grid { 
@@ -506,39 +672,11 @@
             border: 1px solid rgba(42, 157, 143, 0.15);
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
         
-        .stat-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(42, 157, 143, 0.05), rgba(231, 111, 81, 0.05));
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-        
-        .stat-item:hover::before {
-            opacity: 1;
-        }
-        
-        .stat-item::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .stat-item:hover::after {
-            transform: scaleX(1);
+        .dark .stat-item {
+            border: 1px solid rgba(61, 184, 168, 0.15);
         }
         
         .stat-item:hover { 
@@ -590,22 +728,18 @@
             z-index: 1;
         }
 
-        /* --- 6. PROJECTS SECTION - FUNDAL COLORAT --- */
+        /* --- PROJECTS SECTION --- */
         .projects { 
             background: var(--light-alt);
             position: relative;
             border-top: 1px solid rgba(42, 157, 143, 0.1);
             border-bottom: 1px solid rgba(42, 157, 143, 0.1);
+            transition: background 0.5s ease;
         }
         
-        .projects::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(42, 157, 143, 0.3), transparent);
+        .dark .projects {
+            border-top: 1px solid rgba(61, 184, 168, 0.1);
+            border-bottom: 1px solid rgba(61, 184, 168, 0.1);
         }
         
         .projects-grid { 
@@ -625,6 +759,11 @@
             height: 100%;
             display: flex;
             flex-direction: column;
+            cursor: pointer;
+        }
+        
+        .dark .project-card {
+            border: 1px solid rgba(61, 184, 168, 0.15);
         }
         
         .project-card:hover { 
@@ -673,6 +812,10 @@
             z-index: 2;
         }
         
+        .dark .project-category {
+            box-shadow: 0 4px 15px rgba(255, 140, 107, 0.3);
+        }
+        
         .project-title { 
             margin-top: 5px; 
             font-size: 1.4rem; 
@@ -688,35 +831,21 @@
             line-height: 1.7;
         }
 
-        /* --- 7. TEAM SECTION - FUNDAL COLORAT --- */
+        /* --- TEAM SECTION --- */
         #team {
             position: relative;
             overflow: hidden;
             background: var(--light);
             border-top: 1px solid rgba(42, 157, 143, 0.1);
             border-bottom: 1px solid rgba(42, 157, 143, 0.1);
+            transition: background 0.5s ease;
         }
         
-        #team::before {
-            content: '';
-            position: absolute;
-            top: -200px;
-            right: -200px;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(233, 196, 106, 0.08) 0%, transparent 70%);
-            border-radius: 50%;
+        .dark #team {
+            border-top: 1px solid rgba(61, 184, 168, 0.1);
+            border-bottom: 1px solid rgba(61, 184, 168, 0.1);
         }
-
-        .team-leader-container {
-            display: flex; 
-            justify-content: center; 
-            margin-bottom: 80px; 
-            width: 100%;
-            position: relative;
-            z-index: 1;
-        }
-
+        
         .team-grid { 
             display: grid; 
             grid-template-columns: repeat(3, 1fr); 
@@ -739,23 +868,11 @@
             border: 1px solid rgba(42, 157, 143, 0.15);
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
         
-        .team-member::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .team-member:hover::before {
-            transform: scaleX(1);
+        .dark .team-member {
+            border: 1px solid rgba(61, 184, 168, 0.15);
         }
         
         .team-member:hover { 
@@ -781,26 +898,17 @@
             z-index: 1;
         }
         
-        .member-avatar-container::before {
-            content: '';
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            border-radius: 50%;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-        
-        .team-member:hover .member-avatar-container::before {
-            opacity: 0.3;
+        .dark .member-avatar {
+            border: 5px solid rgba(61, 184, 168, 0.15);
         }
         
         .team-member:hover .member-avatar {
             border-color: rgba(42, 157, 143, 0.4);
             transform: scale(1.08);
+        }
+        
+        .dark .team-member:hover .member-avatar {
+            border-color: rgba(61, 184, 168, 0.4);
         }
         
         .member-name { 
@@ -874,6 +982,10 @@
             border: 1px solid rgba(42, 157, 143, 0.1);
         }
         
+        .dark .icon-btn {
+            border: 1px solid rgba(61, 184, 168, 0.1);
+        }
+        
         .icon-btn:hover { 
             background: var(--primary); 
             color: white; 
@@ -882,22 +994,28 @@
             box-shadow: 0 5px 15px rgba(42, 157, 143, 0.3);
         }
         
+        .dark .icon-btn:hover {
+            box-shadow: 0 5px 15px rgba(61, 184, 168, 0.3);
+        }
+        
         .icon-btn.ig:hover { 
             background: linear-gradient(45deg, #405DE6, #833AB4, #C13584, #E1306C); 
             border-color: #E1306C;
         }
 
-        /* --- 8. TESTIMONIALS SECTION - FUNDAL COLORAT --- */
+        /* --- TESTIMONIALS SECTION --- */
         .testimonials-section {
             background: linear-gradient(135deg, rgba(232, 240, 243, 0.95) 0%, rgba(240, 245, 247, 1) 100%);
             position: relative;
             border-top: 1px solid rgba(42, 157, 143, 0.1);
             border-bottom: 1px solid rgba(42, 157, 143, 0.1);
+            transition: background 0.5s ease;
         }
         
-        .testimonials-container {
-            max-width: 1280px;
-            margin: 0 auto;
+        .dark .testimonials-section {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 1) 100%);
+            border-top: 1px solid rgba(61, 184, 168, 0.1);
+            border-bottom: 1px solid rgba(61, 184, 168, 0.1);
         }
         
         .testimonials-grid {
@@ -916,22 +1034,11 @@
             position: relative;
             border: 1px solid rgba(42, 157, 143, 0.1);
             overflow: hidden;
+            cursor: pointer;
         }
         
-        .testimonial-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(42, 157, 143, 0.03), rgba(231, 111, 81, 0.03));
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-        
-        .testimonial-card:hover::before {
-            opacity: 1;
+        .dark .testimonial-card {
+            border: 1px solid rgba(61, 184, 168, 0.1);
         }
         
         .testimonial-card:hover {
@@ -957,6 +1064,10 @@
             left: -15px;
             font-family: Georgia, serif;
             line-height: 1;
+        }
+        
+        .dark .testimonial-text::before {
+            color: rgba(61, 184, 168, 0.1);
         }
         
         .testimonial-author {
@@ -989,7 +1100,108 @@
             font-weight: 700;
         }
 
-        /* --- 9. DONATII --- */
+        /* --- CONTACT SECTION --- */
+        #contact {
+            background: var(--light-alt);
+            border-top: 1px solid rgba(42, 157, 143, 0.1);
+        }
+        
+        .dark #contact {
+            border-top: 1px solid rgba(61, 184, 168, 0.1);
+        }
+        
+        .contact-content { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 60px; 
+            align-items: flex-start; 
+        }
+        
+        .contact-form { 
+            background: var(--white); 
+            padding: 40px; 
+            border-radius: var(--radius); 
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(42, 157, 143, 0.15);
+            transition: var(--transition);
+        }
+        
+        .dark .contact-form {
+            border: 1px solid rgba(61, 184, 168, 0.15);
+        }
+        
+        .contact-form:hover {
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%; 
+            padding: 16px 20px; 
+            margin-bottom: 20px; 
+            border: 1px solid var(--light-gray); 
+            background: var(--light-alt);
+            border-radius: 10px; 
+            font-family: inherit; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1rem;
+            color: var(--dark);
+        }
+        
+        .form-group input:focus, .form-group textarea:focus { 
+            border-color: var(--primary); 
+            background: var(--white);
+            outline: none; 
+            box-shadow: 0 0 0 4px rgba(42, 157, 143, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .dark .form-group input:focus, 
+        .dark .form-group textarea:focus {
+            box-shadow: 0 0 0 4px rgba(61, 184, 168, 0.1);
+        }
+        
+        .btn-submit { 
+            width: 100%; 
+            background: linear-gradient(135deg, var(--darker), var(--dark)); 
+            color: white; 
+            padding: 16px; 
+            border: none; 
+            border-radius: 10px; 
+            cursor: pointer; 
+            font-weight: 800; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+        
+        .btn-submit:hover { 
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark)); 
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(42, 157, 143, 0.3);
+        }
+        
+        .dark .btn-submit:hover {
+            box-shadow: 0 10px 25px rgba(61, 184, 168, 0.3);
+        }
+        
+        .contact-info {
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(42, 157, 143, 0.15);
+            transition: var(--transition);
+        }
+        
+        .dark .contact-info {
+            border: 1px solid rgba(61, 184, 168, 0.15);
+        }
+        
+        .contact-info:hover {
+            box-shadow: var(--shadow-hover);
+        }
+        
+        /* --- DONATII SECTION --- */
         .donate-section {
             background: linear-gradient(135deg, var(--dark) 0%, #1e3a5f 100%);
             color: white;
@@ -1106,105 +1318,38 @@
             box-shadow: 0 8px 20px rgba(231, 111, 81, 0.3);
         }
 
-        /* --- 10. CONTACT - FUNDAL COLORAT --- */
-        #contact {
-            background: var(--light-alt);
-            border-top: 1px solid rgba(42, 157, 143, 0.1);
+        /* Ajustări pentru modul dark */
+        .dark .donate-section {
+            background: linear-gradient(135deg, #0A0F17 0%, #1A2435 100%);
+            border-top: 1px solid rgba(61, 184, 168, 0.1);
         }
         
-        .contact-content { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 60px; 
-            align-items: flex-start; 
+        .dark .donate-section::before {
+            background: radial-gradient(circle, rgba(61, 184, 168, 0.15) 0%, transparent 70%);
         }
         
-        .contact-form { 
-            background: var(--white); 
-            padding: 40px; 
-            border-radius: var(--radius); 
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(42, 157, 143, 0.15);
-            transition: var(--transition);
+        .dark .bank-details {
+            border: 1px solid rgba(61, 184, 168, 0.1);
         }
         
-        .contact-form:hover {
-            box-shadow: var(--shadow-hover);
+        .dark .iban-container:hover {
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(61, 184, 168, 0.1);
         }
         
-        .form-group input, .form-group textarea {
-            width: 100%; 
-            padding: 16px 20px; 
-            margin-bottom: 20px; 
-            border: 1px solid var(--light-gray); 
-            background: var(--light-alt);
-            border-radius: 10px; 
-            font-family: inherit; 
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 1rem;
-            color: var(--dark);
-        }
-        
-        .form-group input:focus, .form-group textarea:focus { 
-            border-color: var(--primary); 
-            background: var(--white);
-            outline: none; 
-            box-shadow: 0 0 0 4px rgba(42, 157, 143, 0.1);
-            transform: translateY(-2px);
-        }
-        
-        .btn-submit { 
-            width: 100%; 
-            background: linear-gradient(135deg, var(--dark), var(--darker)); 
-            color: white; 
-            padding: 16px; 
-            border: none; 
-            border-radius: 10px; 
-            cursor: pointer; 
-            font-weight: 800; 
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 1rem;
-            letter-spacing: 1px;
-        }
-        
-        .btn-submit:hover { 
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark)); 
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(42, 157, 143, 0.3);
-        }
-        
-        .contact-info {
-            background: var(--white);
-            padding: 40px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(42, 157, 143, 0.15);
-            transition: var(--transition);
-        }
-        
-        .contact-info:hover {
-            box-shadow: var(--shadow-hover);
+        .dark .copy-btn:hover {
+            box-shadow: 0 8px 20px rgba(255, 140, 107, 0.3);
         }
 
-        /* --- 11. FOOTER - FĂRĂ NR TELEFON, DOAR COOKIES SI POLITICA --- */
+        /* --- FOOTER --- */
         footer {
-            background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
             color: white;
             padding: 80px 0 30px;
             position: relative;
             overflow: hidden;
             border-top: 5px solid var(--primary);
-        }
-        
-        footer::before {
-            content: '';
-            position: absolute;
-            bottom: -150px;
-            right: -150px;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(42, 157, 143, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
+            transition: background 0.5s ease;
         }
         
         .footer-content {
@@ -1324,6 +1469,10 @@
             box-shadow: 0 8px 20px rgba(42, 157, 143, 0.3);
         }
         
+        .dark .footer-socials a:hover {
+            box-shadow: 0 8px 20px rgba(61, 184, 168, 0.3);
+        }
+        
         .footer-bottom {
             text-align: center;
             border-top: 1px solid rgba(255, 255, 255, 0.15);
@@ -1368,39 +1517,35 @@
             width: 100%;
         }
 
-        /* --- 12. EMAIL LINKS --- */
-        .email-link {
-            color: inherit;
-            text-decoration: none;
-            border-bottom: 1px dotted rgba(42, 157, 143, 0.4);
-            padding-bottom: 2px;
-            transition: all 0.3s ease;
-        }
-        
-        .email-link:hover {
-            color: var(--primary);
-            border-bottom: 1px solid var(--primary);
-        }
-
-        /* --- 13. SCROLL PROGRESS BAR --- */
-        .progress-container {
-            width: 100%;
-            height: 4px;
-            background: transparent;
+        /* --- LIVE CLOCK --- */
+        .live-clock {
             position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1001;
-        }
-        
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            width: 0%;
-            transition: width 0.1s ease;
+            bottom: 20px;
+            right: 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            z-index: 1000;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: var(--shadow);
         }
 
-        /* --- MOBILE --- */
+        /* --- CONFECTTI --- */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* --- MOBILE RESPONSIVE --- */
         @media (max-width: 1200px) {
             .hero-title {
                 font-size: 3.5rem;
@@ -1442,7 +1587,7 @@
                 left: 0; 
                 width: 100%; 
                 height: 100vh;
-                background: rgba(240, 245, 247, 0.98);
+                background: var(--glass-bg);
                 backdrop-filter: blur(15px);
                 -webkit-backdrop-filter: blur(15px);
                 flex-direction: column; 
@@ -1511,6 +1656,10 @@
                 justify-content: center;
                 gap: 20px;
             }
+            
+            .theme-toggle {
+                margin: 20px auto 0;
+            }
         }
         
         @media (max-width: 576px) {
@@ -1551,6 +1700,7 @@
             }
         }
         
+        /* --- ANIMATIONS --- */
         .fade-in { 
             animation: fadeIn 1s cubic-bezier(0.4, 0, 0.2, 1); 
         }
@@ -1566,28 +1716,163 @@
             } 
         }
 
-        /* Smooth scroll behavior */
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 90px;
+        /* Glitch animation for logo */
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
         }
 
+        /* Colorful scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--light);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            border-radius: 6px;
+            background-color: gray;
+        }
+        
+        .dark ::-webkit-scrollbar-track {
+            background: var(--light);
+        }
+        
+        .dark ::-webkit-scrollbar-thumb {
+            background: gray;
+        }
+
+        /* --- MODIFICAȚI PENTRU FOOTER ÎN MODUL DARK --- */
+        .dark footer {
+            background: linear-gradient(135deg, #1a3a3a 0%, #0d1721 100%) !important;
+            border-top: 5px solid #1c9999;
+        }
+
+        .dark .footer-content {
+            color: #e2e8f0;
+        }
+
+        .dark .footer-logo {
+            color: white;
+        }
+
+        .dark .footer-logo span {
+            color: #1c9999;
+        }
+
+        .dark .footer-heading {
+            color: white;
+        }
+
+        .dark .footer-heading::after {
+            background: #f36f54;
+        }
+
+        .dark .footer-links a {
+            color: #cbd5e1;
+        }
+
+        .dark .footer-links a:hover {
+            color: #1c9999;
+        }
+
+        .dark .footer-socials a {
+            background: rgba(28, 153, 153, 0.15);
+            color: #cbd5e1;
+            border: 1px solid rgba(28, 153, 153, 0.3);
+        }
+
+        .dark .footer-socials a:hover {
+            background: #1c9999;
+            color: white;
+            border-color: #1c9999;
+            box-shadow: 0 8px 20px rgba(28, 153, 153, 0.4);
+        }
+
+        .dark .footer-bottom {
+            border-top: 1px solid rgba(28, 153, 153, 0.2);
+            color: #94a3b8;
+        }
+
+        /* --- REPARĂ LOGO-UL ÎN MODUL DARK --- */
+        .dark .logo-icon img {
+            display: none !important;
+        }
+
+        .dark .logo-icon div {
+            display: flex !important;
+            background: linear-gradient(135deg, #1c9999, #f36f54) !important;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 900;
+            font-size: 1.2rem;
+        }
+
+        /* Logo în footer pentru modul dark */
+        .dark .footer-logo span {
+            background: linear-gradient(90deg, #1c9999, #f36f54);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+        }
+
+        /* Înlătură sublinierul pentru logo în footer dark */
+        .dark .footer-logo span::after {
+            background: linear-gradient(90deg, #1c9999, #f36f54);
+            height: 4px;
+            bottom: -2px;
+        }
+
+        /* --- AJUSTĂRI ADIȚIONALE PENTRU CULORILE CLUBULUI ÎN MODUL DARK --- */
+        .dark .footer-tagline {
+            color: #94a3b8;
+        }
+
+        .dark .footer-legal a {
+            color: #94a3b8;
+        }
+
+        .dark .footer-legal a:hover {
+            color: #f36f54;
+        }
+
+        .dark .footer-legal a::after {
+            background: #f36f54;
+        }
+
+        /* Ajustare pentru culoarea de hover pe link-uri în footer dark */
+        .dark .footer-links a::before {
+            color: #f36f54;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Scroll Progress Bar -->
-    <div class="progress-container">
-        <div class="progress-bar" id="progressBar"></div>
-    </div>
-
-    <header>
+    <!-- Header -->
+    <header id="header">
         <div class="header-content">
-            <a href="#" class="logo">
-                <div class="logo-icon"><img src="/images/logo.png" alt="H4H"></div>
-                <div>Hope 4 <span>Humanity</span></div>
+            <a href="#home" class="logo">
+                <div class="logo-icon">
+                    <img src="/images/logo_final.png" alt="Hope4Humanity" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                    <div style="display:none; width: 48px; height: 48px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900;">H4H</div>
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                    <span>Hope4Humanity</span>
+                    <span style="font-size: 0.9rem; color: var(--gray); font-weight: 600;">Suceava</span>
+                </div>
             </a>
-            
+
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
@@ -1600,36 +1885,60 @@
                 <li><a href="#testimonials">Voluntari</a></li>
                 <li><a href="#donate" class="donate-nav">Donații</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li>
+                    <div class="theme-toggle" id="themeToggle" title="Schimbă tema">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                    </div>
+                </li>
             </ul>
         </div>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="container fade-in">
-            <span class="hero-tag">Asociație Non-Profit</span>
-            <h1 class="hero-title">Hope for Humanity <span>Suceava</span></h1>
-            <p class="hero-subtitle">Împreună readucem speranța în comunitățile din Bucovina. Fii schimbarea pe care vrei să o vezi în lume și alătură-te mișcării noastre pentru un impact durabil și transformări de lungă durată.</p>
-            
-            <div class="hero-actions">
-                <a href="#donate" class="btn-main">
-                    <i class="fas fa-heart"></i> Susține Cauza
-                </a>
+        <div class="hero-bg">
+            <canvas id="particle-canvas"></canvas>
+        </div>
+        
+        <div class="container">
+            <div class="hero-content fade-in">
+                <span class="hero-tag">
+                    <i class="fas fa-heart"></i>
+                    Asociație Non-Profit Suceava
+                </span>
                 
-                <div class="hero-socials">
-                    <a href="https://www.instagram.com/hope4humanityassociation" target="_blank" class="social-icon ig" title="Instagram">
-                        <i class="fab fa-instagram"></i>
+                <h1 class="hero-title">
+                    Construim <span>Speranță</span>,<br>
+                    Transformăm <span>Vieți</span>
+                </h1>
+                
+                <p class="hero-subtitle">
+                    Împreună readucem speranța în comunitățile din Bucovina. Fii schimbarea pe care vrei să o vezi în lume și alătură-te mișcării noastre pentru un impact durabil și transformări de lungă durată.
+                </p>
+                
+                <div class="hero-actions">
+                    <a href="#donate" class="btn-main">
+                        <i class="fas fa-heart"></i> Susține Cauza
                     </a>
-                    <a href="https://www.facebook.com/AsociatiaHope4Humanity/" target="_blank" class="social-icon fb" title="Facebook">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="https://www.tiktok.com/@hope4humanityassociation" target="_blank" class="social-icon tt" title="TikTok">
-                        <i class="fab fa-tiktok"></i>
-                    </a>
+                    
+                    <div class="hero-socials">
+                        <a href="https://www.instagram.com/hope4humanityassociation" target="_blank" class="social-icon ig" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.facebook.com/AsociatiaHope4Humanity/" target="_blank" class="social-icon fb" title="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@hope4humanityassociation" target="_blank" class="social-icon tt" title="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Impact Section -->
     <section id="about">
         <div class="container">
             <div class="section-header">
@@ -1637,6 +1946,7 @@
                 <h2 class="section-title">Cifrele Speranței</h2>
                 <p style="color: var(--gray); max-width: 800px; margin: 0 auto; font-size: 1.1rem;">Fiecare număr reprezintă o poveste de viață schimbată în bine. Măsurăm succesul prin zâmbetele pe care le aducem în comunitate și prin transformările durabile pe care le creăm.</p>
             </div>
+            
             <div class="stats-grid">
                 <div class="stat-item">
                     <div class="stat-icon">
@@ -1670,6 +1980,7 @@
         </div>
     </section>
 
+    <!-- Projects Section -->
     <section class="projects" id="projects">
         <div class="container">
             <div class="section-header">
@@ -1679,6 +1990,7 @@
             </div>
             
             <div class="projects-grid">
+                <!-- Proiectul 1 -->
                 <div class="project-card">
                     <div class="project-image-container">
                         <img src="https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Casa" class="project-image">
@@ -1689,6 +2001,8 @@
                         <p class="project-description">Locuință completă pentru o familie cu 4 copii. Structură eficientă energetic cu izolație termică și panouri solare.</p>
                     </div>
                 </div>
+                
+                <!-- Proiectul 2 -->
                 <div class="project-card">
                     <div class="project-image-container">
                         <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Renovare" class="project-image">
@@ -1699,6 +2013,8 @@
                         <p class="project-description">Reabilitare completă a spațiului pentru educație și activități recreative destinate copiilor defavorizați.</p>
                     </div>
                 </div>
+                
+                <!-- Proiectul 3 -->
                 <div class="project-card">
                     <div class="project-image-container">
                         <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Voluntariat" class="project-image">
@@ -1709,70 +2025,11 @@
                         <p class="project-description">Echipe locale au ajutat la placarea cu polistiren și vopsirea fațadei unei școli din comunitate.</p>
                     </div>
                 </div>
-                <div class="project-card">
-                    <div class="project-image-container">
-                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Renovare Școală" class="project-image">
-                    </div>
-                    <div class="project-content">
-                        <span class="project-category">Educație</span>
-                        <h3 class="project-title">Renovare Școală Sat Gălănești</h3>
-                        <p class="project-description">Modernizare săli de clasă și crearea unui spațiu de studiu pentru elevii din zona rurală.</p>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-image-container">
-                        <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Ajutor Umanitar" class="project-image">
-                    </div>
-                    <div class="project-content">
-                        <span class="project-category">Ajutor Umanitar</span>
-                        <h3 class="project-title">Campanie Iarnă 2023</h3>
-                        <p class="project-description">Distribuire de haine, alimente și materiale de încălzit pentru familii vulnerabile din Suceava.</p>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-image-container">
-                        <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Eco Proiect" class="project-image">
-                    </div>
-                    <div class="project-content">
-                        <span class="project-category">Mediu</span>
-                        <h3 class="project-title">Grădina Comunitară</h3>
-                        <p class="project-description">Crearea unei grădini comunitare pentru locuitorii unui cartier și educație ecologică pentru copii.</p>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-image-container">
-                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Centru Tineri" class="project-image">
-                    </div>
-                    <div class="project-content">
-                        <span class="project-category">Tineret</span>
-                        <h3 class="project-title">Centru de Tineret Rădăuți</h3>
-                        <p class="project-description">Amenajarea unui spațiu pentru activități extracurriculare și dezvoltare personală pentru tineri.</p>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-image-container">
-                        <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Accessibilitate" class="project-image">
-                    </div>
-                    <div class="project-content">
-                        <span class="project-category">Accessibilitate</span>
-                        <h3 class="project-title">Acces pentru Persoane cu Dizabilități</h3>
-                        <p class="project-description">Instalare rampă de acces și adaptare spații pentru persoane cu mobilitate redusă în clădiri publice.</p>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-image-container">
-                        <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Festival" class="project-image">
-                    </div>
-                    <div class="project-content">
-                        <span class="project-category">Eveniment</span>
-                        <h3 class="project-title">Festivalul Speranței 2023</h3>
-                        <p class="project-description">Organizarea unui festival comunitar cu concerte, ateliere și activități pentru întreaga familie.</p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
 
+    <!-- Team Section -->
     <section id="team">
         <div class="container">
             <div class="section-header">
@@ -1781,7 +2038,7 @@
                 <p style="color: var(--gray); max-width: 800px; margin: 0 auto; font-size: 1.1rem;">Fiecare membru al echipei noastre aduce expertiză și pasiune pentru a transforma comunitățile din Suceava. Suntem uniti de aceeași viziune și misiune.</p>
             </div>
             
-            <div class="team-leader-container">
+            <div style="display: flex; justify-content: center; margin-bottom: 80px;">
                 <div class="team-member president">
                     <div class="member-avatar-container">
                         <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Presedinte" class="member-avatar">
@@ -1803,7 +2060,7 @@
                 </div>
             </div>
 
-            <!-- Membrii Board - 3 pe linie -->
+            <!-- Restul echipei -->
             <div class="team-grid">
                 <div class="team-member">
                     <div class="member-avatar-container">
@@ -1855,62 +2112,11 @@
                         </a>
                     </div>
                 </div>
-
-                <div class="team-member">
-                    <div class="member-avatar-container">
-                        <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Social Media" class="member-avatar">
-                    </div>
-                    <h3 class="member-name">Ioana Dumitrescu</h3>
-                    <div class="member-role">Resp. Social Media</div>
-                    <div class="member-description">Strategia digitală, managementul rețelelor sociale, crearea de conținut, campanii online și promovare. Expert în marketing digital și storytelling.</div>
-                    <div class="member-contact-icons">
-                        <a href="https://www.instagram.com/ioanadumitrescu_h4h" target="_blank" class="icon-btn ig" title="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=socialmedia@hope4humanity.ro&su=Contact%20Hope%20for%20Humanity%20Suceava&body=Bun%C4%83%20ziua,%0D%0A%0D%0AV%C4%83%20contactez%20în%20leg%C4%83tur%C4%83%20cu...&bcc=" target="_blank" class="icon-btn" title="Trimite email">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="team-member">
-                    <div class="member-avatar-container">
-                        <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Redactie" class="member-avatar">
-                    </div>
-                    <h3 class="member-name">Andrei Georgescu</h3>
-                    <div class="member-role">Resp. Redacție</div>
-                    <div class="member-description">Redactarea materialelor informative, rapoarte, articole, comunicate de presă și conținut pentru site. Jurnalist cu experiență în sectorul nonprofit.</div>
-                    <div class="member-contact-icons">
-                        <a href="https://www.instagram.com/andreigeorgescu_h4h" target="_blank" class="icon-btn ig" title="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=redactie@hope4humanity.ro&su=Contact%20Hope%20for%20Humanity%20Suceava&body=Bun%C4%83%20ziua,%0D%0A%0D%0AV%C4%83%20contactez%20în%20leg%C4%83tur%C4%83%20cu...&bcc=" target="_blank" class="icon-btn" title="Trimite email">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="team-member">
-                    <div class="member-avatar-container">
-                        <img src="https://randomuser.me/api/portraits/women/90.jpg" alt="Designer" class="member-avatar">
-                    </div>
-                    <h3 class="member-name">Cristina Mihai</h3>
-                    <div class="member-role">Graphic Designer</div>
-                    <div class="member-description">Design materiale promoționale, identitate vizuală, bannere, postări grafice și design pentru evenimente. Creative Director cu experiență de 8 ani.</div>
-                    <div class="member-contact-icons">
-                        <a href="https://www.instagram.com/cristinamihai_h4h" target="_blank" class="icon-btn ig" title="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=design@hope4humanity.ro&su=Contact%20Hope%20for%20Humanity%20Suceava&body=Bun%C4%83%20ziua,%0D%0A%0D%0AV%C4%83%20contactez%20în%20leg%C4%83tur%C4%83%20cu...&bcc=" target="_blank" class="icon-btn" title="Trimite email">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
 
-    <!-- SECȚIUNEA "VOCEA VOLUNTARILOR" - MAI MULTE TESTIMONIALE -->
+    <!-- Testimonials Section -->
     <section id="testimonials" class="testimonials-section">
         <div class="container">
             <div class="section-header">
@@ -1919,122 +2125,42 @@
                 <p style="color: var(--gray); max-width: 800px; margin: 0 auto; font-size: 1.1rem;">Află ce spun oamenii care au făcut diferența alături de noi. Poveștile lor sunt cele care ne motivează să continuăm.</p>
             </div>
             
-            <div class="testimonials-container">
-                <div class="testimonials-grid">
-                    <div class="testimonial-card">
-                        <div class="testimonial-text">
-                            "Am venit la primul meu proiect cu H4H ca student și am rămas pentru experiența umană de neuitat. Să vezi zâmbetul unei familii când intră în casa lor nouă... nu are preț."
-                        </div>
-                        <div class="testimonial-author">
-                            <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Andrei" class="author-avatar">
-                            <div class="author-info">
-                                <h4>Andrei Popescu</h4>
-                                <div class="author-role">Voluntar de 2 ani</div>
-                            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Am venit la primul meu proiect cu H4H ca student și am rămas pentru experiența umană de neuitat. Să vezi zâmbetul unei familii când intră în casa lor nouă... nu are preț."
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Andrei" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Andrei Popescu</h4>
+                            <div class="author-role">Voluntar de 2 ani</div>
                         </div>
                     </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="testimonial-text">
-                            "Ca mamă a două copii, să contribui la construirea unei case pentru o familie cu copii mici a fost una dintre cele mai frumoase experiențe. Aici am învățat că fiecare mic efort contează."
-                        </div>
-                        <div class="testimonial-author">
-                            <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Maria" class="author-avatar">
-                            <div class="author-info">
-                                <h4>Maria Ionescu</h4>
-                                <div class="author-role">Voluntar ocazional</div>
-                            </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Ca mamă a două copii, să contribui la construirea unei case pentru o familie cu copii mici a fost una dintre cele mai frumoase experiențe. Aici am învățat că fiecare mic efort contează."
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Maria" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Maria Ionescu</h4>
+                            <div class="author-role">Voluntar ocazional</div>
                         </div>
                     </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="testimonial-text">
-                            "Am coordonat echipa de tineri la renovarea centrului social. Nu doar că am transformat un spațiu, dar am construit prietenii și am descoperit puterea lucrului în echipă pentru comunitate."
-                        </div>
-                        <div class="testimonial-author">
-                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Elena" class="author-avatar">
-                            <div class="author-info">
-                                <h4>Elena Moldovan</h4>
-                                <div class="author-role">Coordonator Voluntari</div>
-                            </div>
-                        </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Am coordonat echipa de tineri la renovarea centrului social. Nu doar că am transformat un spațiu, dar am construit prietenii și am descoperit puterea lucrului în echipă pentru comunitate."
                     </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="testimonial-text">
-                            "Ca pensionar, am crezut că viața mea activă s-a încheiat. H4H mi-a arătat că am încă multe de oferit. Sunt voluntar de 3 ani și fiecare zi este o binecuvântare."
-                        </div>
-                        <div class="testimonial-author">
-                            <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Ion" class="author-avatar">
-                            <div class="author-info">
-                                <h4>Ion Vasile</h4>
-                                <div class="author-role">Voluntar Senior</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="testimonial-text">
-                            "Am venit din străinătate să-mi vizitez familia și am rămas să ajut la proiectul din comunitate. Acum vin în fiecare vară special pentru activitățile H4H."
-                        </div>
-                        <div class="testimonial-author">
-                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Ana" class="author-avatar">
-                            <div class="author-info">
-                                <h4>Ana Maria</h4>
-                                <div class="author-role">Voluntar Sezonier</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="testimonial-text">
-                            "Echipa H4H m-a învățat mai multe despre omenie și compasiune decât toți anii de școală. Sunt recunoscător pentru fiecare experiență și pentru oamenii minunați pe care i-am cunoscut."
-                        </div>
-                        <div class="testimonial-author">
-                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Mihai" class="author-avatar">
-                            <div class="author-info">
-                                <h4>Mihai Codreanu</h4>
-                                <div class="author-role">Voluntar de 1 an</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="testimonial-text">
-                            "Ca corporatist, voluntariatul cu H4H este cea mai bună terapie. Mă reconectez cu realitatea și contribui la ceva concret. Recomand tuturor colegilor mei."
-                        </div>
-                        <div class="testimonial-author">
-                            <img src="https://randomuser.me/api/portraits/women/55.jpg" alt="Corina" class="author-avatar">
-                            <div class="author-info">
-                                <h4>Corina Popa</h4>
-                                <div class="author-role">Voluntar Corporativ</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="testimonial-text">
-                            "Am început ca voluntar la vârsta de 16 ani. Acum, la 20, coordonez o echipă. H4H mi-a oferit nu doar experiență, ci și o a doua familie."
-                        </div>
-                        <div class="testimonial-author">
-                            <img src="https://randomuser.me/api/portraits/men/25.jpg" alt="Radu" class="author-avatar">
-                            <div class="author-info">
-                                <h4>Radu Mihai</h4>
-                                <div class="author-role">Lider de Echipa Tineri</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="testimonial-text">
-                            "După ce am pierdut soțul, voluntariatul cu H4H m-a ajutat să trec peste durere. Aici am găsit o nouă familie și un scop. Mulțumesc pentru tot!"
-                        </div>
-                        <div class="testimonial-author">
-                            <img src="https://randomuser.me/api/portraits/women/70.jpg" alt="Doamna Maria" class="author-avatar">
-                            <div class="author-info">
-                                <h4>Maria Grigore</h4>
-                                <div class="author-role">Voluntar de 4 ani</div>
-                            </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Elena" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Elena Moldovan</h4>
+                            <div class="author-role">Coordonator Voluntari</div>
                         </div>
                     </div>
                 </div>
@@ -2078,6 +2204,7 @@
         </div>
     </section>
 
+    <!-- Contact Section -->
     <section id="contact">
         <div class="container">
             <div class="section-header">
@@ -2132,7 +2259,7 @@
         </div>
     </section>
 
-    <!-- FOOTER - FĂRĂ NR TELEFON, DOAR COOKIES SI POLITICA -->
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -2185,109 +2312,374 @@
     </footer>
 
     <script>
-        // Scripts Navigare
-        const mobileBtn = document.getElementById('mobileMenuBtn');
-        const navList = document.getElementById('navLinks');
+        // --- THEME TOGGLE ---
+        const themeToggle = document.getElementById('themeToggle');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
         
-        mobileBtn.addEventListener('click', () => {
-            navList.classList.toggle('active');
-            mobileBtn.innerHTML = navList.classList.contains('active') ? 
-                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        // Verifică tema salvată sau preferința sistemului
+        const currentTheme = localStorage.getItem('theme') || 
+                           (prefersDarkScheme.matches ? 'dark' : 'light');
+        
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            const icon = themeToggle.querySelector('i');
+            
+            // Schimbă iconița
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+            
+            // Animație buton
+            themeToggle.style.transform = 'rotate(360deg) scale(1.1)';
+            setTimeout(() => {
+                themeToggle.style.transform = '';
+            }, 300);
         });
 
+        // --- MOBILE MENU ---
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Închide meniul când dai click pe un link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
-                navList.classList.remove('active');
-                mobileBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                
-                // Update active class
-                document.querySelectorAll('.nav-links a').forEach(item => {
-                    item.classList.remove('active');
-                });
-                link.classList.add('active');
+                navLinks.classList.remove('active');
+                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
             });
         });
 
-        // Scroll Progress Bar
+        // --- HEADER SCROLL EFFECT ---
         window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById("progressBar").style.width = scrolled + "%";
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
         });
 
-        // Counter Animation
+        // --- ANIMATED COUNTERS ---
         const counters = document.querySelectorAll('.stat-number');
+        
+        const animateCounter = (counter) => {
+            const target = +counter.getAttribute('data-count');
+            const count = +counter.innerText;
+            const increment = target / 200;
+            
+            if (count < target) {
+                counter.innerText = Math.ceil(count + increment);
+                setTimeout(() => animateCounter(counter), 1);
+            } else {
+                counter.innerText = target;
+            }
+        };
+        
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    const counter = entry.target;
-                    const target = +counter.getAttribute('data-count');
-                    const speed = 150;
-                    const updateCount = () => {
-                        const count = +counter.innerText;
-                        const inc = target / speed;
-                        if(count < target) {
-                            counter.innerText = Math.ceil(count + inc);
-                            setTimeout(updateCount, 15);
-                        } else {
-                            counter.innerText = target;
-                        }
-                    };
-                    updateCount();
-                    observer.unobserve(counter);
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    observer.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.5 });
         
-        counters.forEach(c => observer.observe(c));
+        counters.forEach(counter => observer.observe(counter));
 
-        // Formular
-        document.getElementById('contactForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Mesaj trimis cu succes! Te vom contacta în cel mai scurt timp.');
-            e.target.reset();
-        });
-
-        // COPY IBAN FUNCTION
+        // --- COPY IBAN FUNCTION ---
         function copyIBAN() {
-            var ibanText = document.getElementById("ibanText").innerText;
-            navigator.clipboard.writeText(ibanText).then(function() {
-                // Schimbă textul butonului temporar
+            const ibanText = document.getElementById('ibanText').innerText;
+            navigator.clipboard.writeText(ibanText).then(() => {
                 const btn = document.querySelector('.copy-btn');
                 const originalHTML = btn.innerHTML;
                 btn.innerHTML = '<i class="fas fa-check"></i> Copiat!';
-                btn.style.background = 'linear-gradient(135deg, #2A9D8F, #21867a)';
+                btn.style.background = '#4CAF50';
+                
+                // Creează efect confetti
+                createConfetti();
                 
                 setTimeout(() => {
                     btn.innerHTML = originalHTML;
-                    btn.style.background = 'linear-gradient(135deg, var(--primary), var(--primary-dark))';
+                    btn.style.background = '';
                 }, 2000);
-            }, function(err) {
-                console.error('Eroare la copiere: ', err);
             });
         }
+
+        // --- PARTICLES BACKGROUND ---
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
         
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.style.boxShadow = '0 8px 40px rgba(0,0,0,0.12)';
-                header.style.background = 'rgba(240, 245, 247, 0.98)';
-                header.style.backdropFilter = 'blur(25px)';
-                header.style.webkitBackdropFilter = 'blur(25px)';
-                header.style.padding = '0';
-            } else {
-                header.style.boxShadow = '0 4px 30px rgba(0,0,0,0.08)';
-                header.style.background = 'rgba(240, 245, 247, 0.95)';
-                header.style.backdropFilter = 'blur(20px)';
-                header.style.webkitBackdropFilter = 'blur(20px)';
-                header.style.padding = '0';
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const particles = [];
+        const particleCount = 80;
+        
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+                this.color = Math.random() > 0.5 ? 
+                    `rgba(42, 157, 143, ${Math.random() * 0.5})` : 
+                    `rgba(231, 111, 81, ${Math.random() * 0.5})`;
             }
-        });
+            
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+            
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
         
-        // Set active nav link on scroll
-        window.addEventListener('scroll', function() {
+        function initParticles() {
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+        
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+                
+                // Conectează particulele apropiate
+                particles.forEach(otherParticle => {
+                    const dx = particle.x - otherParticle.x;
+                    const dy = particle.y - otherParticle.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 100) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(42, 157, 143, ${0.2 * (1 - distance/100)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particle.x, particle.y);
+                        ctx.lineTo(otherParticle.x, otherParticle.y);
+                        ctx.stroke();
+                    }
+                });
+            });
+            
+            requestAnimationFrame(animateParticles);
+        }
+        
+        initParticles();
+        animateParticles();
+        
+        // --- RESIZE HANDLER ---
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // --- FORM SUBMISSION ---
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const submitBtn = contactForm.querySelector('.btn-submit');
+            const originalText = submitBtn.innerHTML;
+            
+            submitBtn.innerHTML = '<i class="fas fa-check"></i> Mesaj Trimis!';
+            submitBtn.style.background = '#4CAF50';
+            
+            // Creează confetti la trimiterea formularului
+            createConfetti();
+            
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.style.background = '';
+                contactForm.reset();
+            }, 3000);
+        });
+
+        // --- CONFECTTI EFFECT ---
+        function createConfetti() {
+            const colors = ['#2A9D8F', '#E76F51', '#e9c46a', '#1a2b3c', '#FFFFFF'];
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = `${Math.random() * 100}vw`;
+                confetti.style.top = '-20px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = `${Math.random() * 10 + 5}px`;
+                confetti.style.height = `${Math.random() * 10 + 5}px`;
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                confetti.style.opacity = Math.random() * 0.7 + 0.3;
+                
+                document.body.appendChild(confetti);
+                
+                // Animație confetti
+                const animation = confetti.animate([
+                    { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                    { transform: `translateY(${window.innerHeight + 100}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                ], {
+                    duration: Math.random() * 3000 + 2000,
+                    easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
+                });
+                
+                animation.onfinish = () => confetti.remove();
+            }
+        }
+
+        // --- TYPING EFFECT FOR HERO ---
+        const heroTexts = [
+            'Construim Speranță',
+            'Transformăm Vieți',
+            'Unim Comunități',
+            'Creăm Viitor'
+        ];
+        
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingSpeed = 100;
+        const deleteSpeed = 50;
+        const pauseDuration = 2000;
+        
+        function typeText() {
+            const heroSpan = document.querySelector('.hero-title span:first-child');
+            const currentText = heroTexts[textIndex];
+            
+            if (isDeleting) {
+                heroSpan.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                heroSpan.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+            
+            if (!isDeleting && charIndex === currentText.length) {
+                setTimeout(() => isDeleting = true, pauseDuration);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % heroTexts.length;
+            }
+            
+            setTimeout(typeText, isDeleting ? deleteSpeed : typingSpeed);
+        }
+        
+        // Pornește efectul de scriere după 1 secundă
+        setTimeout(typeText, 1000);
+
+        // --- LIVE CLOCK ---
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('ro-RO', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            const dateString = now.toLocaleDateString('ro-RO', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            const existingClock = document.querySelector('.live-clock');
+            if (existingClock) {
+                existingClock.innerHTML = `
+                    <i class="fas fa-clock" style="color: var(--primary);"></i>
+                    <span>${dateString} | ${timeString}</span>
+                `;
+            } else {
+                const clockElement = document.createElement('div');
+                clockElement.className = 'live-clock';
+                clockElement.innerHTML = `
+                    <i class="fas fa-clock" style="color: var(--primary);"></i>
+                    <span>${dateString} | ${timeString}</span>
+                `;
+                document.body.appendChild(clockElement);
+            }
+        }
+        
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // --- 3D CARD TILT EFFECT ---
+        const cards = document.querySelectorAll('.project-card, .team-member, .stat-item, .testimonial-card');
+        
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateY = (x - centerX) / 25;
+                const rotateX = (centerY - y) / 25;
+                
+                card.style.transform = `
+                    perspective(1000px)
+                    rotateX(${rotateX}deg)
+                    rotateY(${rotateY}deg)
+                    translateZ(10px)
+                `;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+
+        // --- SMOOTH SCROLL ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Închide meniul mobil dacă este deschis
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                    mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+                    
+                    // Scroll la element
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // --- ACTIVE NAV LINK ON SCROLL ---
+        window.addEventListener('scroll', () => {
             let current = '';
             const sections = document.querySelectorAll('section');
             const navHeight = document.querySelector('header').offsetHeight;
@@ -2295,39 +2687,116 @@
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - navHeight - 100)) {
+                if (window.scrollY >= (sectionTop - navHeight - 100)) {
                     current = section.getAttribute('id');
                 }
             });
             
             document.querySelectorAll('.nav-links a').forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
+                if (link.getAttribute('href') === `#${current}`) {
                     link.classList.add('active');
                 }
             });
         });
-        
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            const isClickInsideNav = navList.contains(e.target) || mobileBtn.contains(e.target);
-            if (!isClickInsideNav && navList.classList.contains('active')) {
-                navList.classList.remove('active');
-                mobileBtn.innerHTML = '<i class="fas fa-bars"></i>';
+
+        // --- INITIAL ANIMATIONS ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animate elements on load
+            const animatedElements = document.querySelectorAll('.hero-content, .section-header, .project-card, .team-member, .stat-item, .testimonial-card');
+            
+            animatedElements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+            
+            // Set initial styles
+            animatedElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+            
+            // Verifică tema sistemului la încărcare
+            if (prefersDarkScheme.matches && !localStorage.getItem('theme')) {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
             }
+            
+            // Arată un mesaj de bun venit
+            setTimeout(() => {
+                const welcomeMsg = document.createElement('div');
+                welcomeMsg.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: var(--glass-bg);
+                    backdrop-filter: blur(20px);
+                    border: 1px solid var(--glass-border);
+                    padding: 20px 40px;
+                    border-radius: var(--radius);
+                    color: var(--dark);
+                    font-size: 1.5rem;
+                    font-weight: 700;
+                    z-index: 9999;
+                    opacity: 0;
+                    text-align: center;
+                    box-shadow: var(--shadow);
+                    transition: opacity 0.5s;
+                `;
+                welcomeMsg.innerHTML = `
+                    <div style="margin-bottom: 10px;">✨</div>
+                    <div>Bine ai venit!</div>
+                    <div style="font-size: 1rem; margin-top: 10px; opacity: 0.8;">Hope for Humanity Suceava</div>
+                `;
+                
+                document.body.appendChild(welcomeMsg);
+                
+                // Animație intrare
+                setTimeout(() => welcomeMsg.style.opacity = '1', 100);
+                
+                // Animație ieșire și ștergere
+                setTimeout(() => {
+                    welcomeMsg.style.opacity = '0';
+                    setTimeout(() => welcomeMsg.remove(), 500);
+                }, 2000);
+                
+                // Creează confetti la încărcare
+                createConfetti();
+            }, 500);
         });
 
-        // Add hover effects to all interactive elements
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add subtle animation to hero on load
+        // --- PARALLAX EFFECT FOR HERO TITLE ---
+        document.addEventListener('mousemove', (e) => {
             const heroTitle = document.querySelector('.hero-title');
-            const heroSubtitle = document.querySelector('.hero-subtitle');
+            const x = (window.innerWidth - e.pageX * 2) / 100;
+            const y = (window.innerHeight - e.pageY * 2) / 100;
+            heroTitle.style.transform = `translateX(${x}px) translateY(${y}px)`;
+        });
+
+        // --- COLORFUL BORDER EFFECT ON HOVER ---
+        const colorfulBorders = document.querySelectorAll('.project-card, .team-member, .stat-item');
+        
+        colorfulBorders.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                const colors = ['#2A9D8F', '#E76F51', '#e9c46a', '#1a2b3c'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                element.style.borderColor = randomColor;
+                element.style.boxShadow = `0 20px 40px ${randomColor}40`;
+            });
             
-            setTimeout(() => {
-                heroTitle.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-                heroSubtitle.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-            }, 100);
+            element.addEventListener('mouseleave', () => {
+                setTimeout(() => {
+                    element.style.borderColor = '';
+                    element.style.boxShadow = '';
+                }, 300);
+            });
         });
     </script>
 </body>
 </html>
+
+
