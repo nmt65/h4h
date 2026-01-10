@@ -920,7 +920,7 @@
             letter-spacing: 1px;
         }
 
-        /* --- TEAM SECTION --- */
+        /* --- MODIFICARE: TEAM SECTION --- */
         #team {
             position: relative;
             overflow: hidden;
@@ -935,15 +935,68 @@
             border-bottom: 1px solid rgba(61, 184, 168, 0.1);
         }
         
+        /* NOU: Container special pentru președinte */
+        .president-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* NOU: Stil pentru cardul președintelui (mai mare) */
+        .team-member.president {
+            max-width: 600px;
+            width: 100%;
+            transform: none;
+            border-top: 5px solid var(--gold);
+            box-shadow: var(--shadow-hover);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            text-align: left;
+            padding: 40px;
+            gap: 30px;
+            cursor: pointer;
+        }
+        
+        .team-member.president:hover {
+            transform: translateY(-10px);
+        }
+        
+        .team-member.president .member-avatar-container {
+            margin: 0;
+            flex-shrink: 0;
+            width: 150px;
+            height: 150px;
+        }
+        
+        .team-member.president .member-avatar {
+            width: 100%;
+            height: 100%;
+            border: 5px solid rgba(233, 196, 106, 0.3);
+        }
+        
+        .team-member.president .member-content {
+            flex-grow: 1;
+        }
+        
+        .team-member.president .member-role {
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        /* Grid pentru restul membrilor - 3 pe rând */
         .team-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            grid-template-columns: repeat(3, 1fr); 
             gap: 35px; 
             justify-content: center;
             position: relative;
             z-index: 1;
         }
         
+        /* Stiluri pentru cardurile normale */
         .team-member {
             background: var(--white); 
             padding: 35px 30px; 
@@ -1036,16 +1089,6 @@
             margin-bottom: 25px;
             flex-grow: 1;
         }
-
-        .team-member.president {
-            border-top: 5px solid var(--gold);
-            transform: scale(1.05);
-            box-shadow: var(--shadow-hover);
-        }
-        
-        .team-member.president:hover {
-            transform: scale(1.05) translateY(-10px);
-        }
         
         .team-member.president .member-role { 
             color: var(--gold);
@@ -1090,6 +1133,47 @@
         .icon-btn.ig:hover { 
             background: linear-gradient(45deg, #405DE6, #833AB4, #C13584, #E1306C); 
             border-color: #E1306C;
+        }
+
+        /* --- MODIFICARE RESPONSIVE PENTRU TEAM SECTION --- */
+        @media (max-width: 992px) {
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .team-member.president {
+                flex-direction: column;
+                text-align: center;
+                max-width: 500px;
+            }
+            
+            .team-member.president .member-avatar-container {
+                width: 120px;
+                height: 120px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .president-container {
+                margin-bottom: 40px;
+            }
+            
+            .team-member.president {
+                max-width: 100%;
+                padding: 30px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .team-member.president {
+                flex-direction: column;
+                text-align: center;
+                padding: 25px;
+            }
         }
 
         /* --- TESTIMONIALS SECTION --- */
@@ -1701,11 +1785,6 @@
                 gap: 25px;
             }
             
-            .team-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
-            
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 40px;
@@ -2164,7 +2243,7 @@
         </div>
     </div>
 
-    <!-- Team Section -->
+    <!-- Team Section MODIFICATĂ -->
     <section id="team">
         <div class="container">
             <div class="section-header">
@@ -2173,26 +2252,34 @@
                 <p style="color: var(--gray); max-width: 800px; margin: 0 auto; font-size: 1.1rem;">Fiecare membru al echipei noastre aduce expertiză și pasiune pentru a transforma comunitățile din Suceava. Suntem uniti de aceeași viziune și misiune.</p>
             </div>
             
-            <div class="team-grid">
-                <!-- Președinte -->
+            <!-- Președinte - pe primul rând singur -->
+            <div class="president-container">
                 <div class="team-member president" onclick="openMemberModal(0)">
                     <div class="member-avatar-container">
                         <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Presedinte" class="member-avatar">
                     </div>
-                    <h3 class="member-name">Alexandru Popescu</h3>
-                    <div class="member-role">Președinte</div>
-                    <div class="member-description">Coordonarea generală a asociației, reprezentare publică, dezvoltare strategică și gestionarea parteneriatelor majore.</div>
-                    <div class="member-contact-icons">
-                        <a href="https://www.instagram.com/alexandrupopescu_h4h" target="_blank" class="icon-btn ig" title="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=presedinte@hope4humanity.ro" target="_blank" class="icon-btn" title="Trimite email">
-                            <i class="fas fa-envelope"></i>
-                        </a>
+                    <div class="member-content">
+                        <h3 class="member-name">Alexandru Popescu</h3>
+                        <div class="member-role">Președinte & Fondator</div>
+                        <div class="member-description">Coordonarea generală a asociației, reprezentare publică, dezvoltare strategică și gestionarea parteneriatelor majore. Cu o experiență de peste 10 ani în sectorul nonprofit, Alexandru a fondat H4H cu viziunea de a aduce schimbări durabile în comunitățile din Bucovina.</div>
+                        <div class="member-contact-icons">
+                            <a href="https://www.instagram.com/alexandrupopescu_h4h" target="_blank" class="icon-btn ig" title="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=presedinte@hope4humanity.ro" target="_blank" class="icon-btn" title="Trimite email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="tel:+40740123456" class="icon-btn" title="Sună">
+                                <i class="fas fa-phone"></i>
+                            </a>
+                        </div>
+                        <button class="view-more" style="margin-top: 15px;">Vezi autobiografie</button>
                     </div>
-                    <button class="view-more" style="margin-top: 15px;">Vezi autobiografie</button>
                 </div>
-                
+            </div>
+            
+            <!-- Restul membrilor - două rânduri de 3 -->
+            <div class="team-grid">
                 <!-- Vicepreședinte -->
                 <div class="team-member" onclick="openMemberModal(1)">
                     <div class="member-avatar-container">
@@ -2555,7 +2642,7 @@
                     <ul>
                         <li>Suprafață utilă: 85 mp</li>
                         <li>3 dormitoare, bucătărie, living, 2 băi</li>
-                        <li>Izolație termică de înaltă performană</li>
+                        <li>Izolație termică de înaltă performanță</li>
                         <li>Sistem de panouri solare pentru apă caldă</li>
                         <li>Ferestre termopan</li>
                         <li>Instalație electrică și sanitare conforme normelor</li>
@@ -2746,7 +2833,7 @@
             {
                 name: "Alexandru Popescu",
                 role: "Președinte",
-                position: "Președinte",
+                position: "Președinte & Fondator",
                 experience: "12 ani",
                 specialization: "Management Non-Profit, Leadership",
                 bio: `
